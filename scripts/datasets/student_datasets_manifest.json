@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "manifest_id": "student_external_kitti_pilot_v1",
+  "checked_date": "2026-11-03",
+  "scope": "Three synced+rectified KITTI drives and calibration; external development pilot, not a final test or an automatic training import",
+  "publisher_pages": [
+    "https://www.cvlibs.net/datasets/kitti/raw_data.php",
+    "https://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_prediction"
+  ],
+  "publisher_downloader": "https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data_downloader.zip",
+  "license_information": "https://www.cvlibs.net/datasets/kitti/",
+  "integrity_note": "Expected sizes were checked with HTTP HEAD. No publisher SHA-256 is supplied here. Local SHA-256 plus ZIP CRC verifies received artifacts, not calibration or measurement accuracy. S3 multipart ETags are not file hashes.",
+  "drives": [
+    {"id": "2011_09_26_drive_0001_sync", "suggested_role": "development_train"},
+    {"id": "2011_09_26_drive_0005_sync", "suggested_role": "development_train"},
+    {"id": "2011_09_30_drive_0016_sync", "suggested_role": "development_validation"}
+  ],
+  "split_note": "Provisional drive/date split only. Audit repeated locations and frame identities before use. No untouched final-test claim; pretrained models may have seen KITTI.",
+  "assets": [
+    {
+      "name": "2011_09_26_calib.zip", "kind": "calibration", "optional_depth": false,
+      "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data/2011_09_26_calib.zip",
+      "bytes": 4068
+    },
+    {
+      "name": "2011_09_30_calib.zip", "kind": "calibration", "optional_depth": false,
+      "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data/2011_09_30_calib.zip",
+      "bytes": 4073
+    },
+    {
+      "name": "2011_09_26_drive_0001_sync.zip", "kind": "synced_drive", "optional_depth": false,
+      "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data/2011_09_26_drive_0001/2011_09_26_drive_0001_sync.zip",
+      "bytes": 458643963
+    },
+    {
+      "name": "2011_09_26_drive_0005_sync.zip", "kind": "synced_drive", "optional_depth": false,
+      "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data/2011_09_26_drive_0005/2011_09_26_drive_0005_sync.zip",
+      "bytes": 645940900
+    },
+    {
+      "name": "2011_09_30_drive_0016_sync.zip", "kind": "synced_drive", "optional_depth": false,
+      "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data/2011_09_30_drive_0016/2011_09_30_drive_0016_sync.zip",
+      "bytes": 1134226963
+    },
+    {
+      "name": "data_depth_annotated.zip", "kind": "derived_depth", "optional_depth": true,
+      "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_depth_annotated.zip",
+      "bytes": 14241086697,
+      "note": "Publisher archive covers the wider KITTI depth benchmark. Only selected pilot-drive members are extracted; source archive remains complete. Derived depth is separate from raw measured scans. Not all pilot drives are guaranteed depth-benchmark members."
+    }
+  ]
+}

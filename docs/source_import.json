@@ -1665,6 +1665,86 @@
       "path": "uav_reconstruction/adaptive_uav/eval_selector_reconstruction.py",
       "sha256": "d2ce997bd641b395bb3e41e4257c3dd7c04f8a67435acf15f33ee7055a1e6e3e",
       "source": "remote evaluation module; dataset root made configurable"
+    },
+    {
+      "path": "scripts/datasets/download_direct_sources.py",
+      "sha256": "1b029a18fc842cc47057ca1e2eb75e67670870eb0432c88521a630d1f7e7bac0",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/README.md",
+      "sha256": "99f414b41aebbd6b01b55f1691535e2ee6fa415687a489a9bb69b110d2abf800",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/download_mirrors.json",
+      "sha256": "bb7ef245b7a3ba19ddf85f7e47399e446f30c8ecf91acec2f9d75dd224f3ce32",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/prepare_selector_corpus.py",
+      "sha256": "caedae367b223e0fef6ab2ce84c336925aafc892a28a40118309c399ce1d2742",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/verify_required_datasets.py",
+      "sha256": "9c614cc0a73fc265d5f196a1c1ac6f527cccf0cb9e40bb30c567377b1aec1652",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/test_dataset_download_responses.py",
+      "sha256": "62b1e4734319d75cb46d932b75af5ba7e69e732cecc2397a89ff2c3c3f8cde92",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/STUDENT_DATASET_DOWNLOAD.md",
+      "sha256": "f506f8f3104c6eac685fa58f3accdba29767ac07c893e1e07057c13de2b1bb5b",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/student_datasets_manifest.json",
+      "sha256": "6a283fb33d93a0006f9c5a948d734e163b222bd38839c662d5a51d69ae2429d6",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/test_student_downloader.py",
+      "sha256": "27c34664776180c6d6c8fbe3b2f3de524b17e37d3aface90f7024cadb4dcd0ba",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/prepare_uavlight.py",
+      "sha256": "3585cf219965483754456087ea622ecfd6e94076721774aeb7c8fb336f892982",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/prepare_jb3d_metadata.py",
+      "sha256": "36a66ae1b23939f1afd1fbb2638d0a62aab4793cfce9fab6503817cff37d6feb",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/geostreamfusion_setup_datasets.py",
+      "sha256": "3dc0a19eb69bc380f6664d26998acf165e84b7ef9dea8641cb2c458156e3cf26",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/test_prepared_geometry.py",
+      "sha256": "66709c86dc7f4971eaa9a88d2ff3c6073797447b83443c18e435f2ed4901d0ae",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/download_user_drive_folder.py",
+      "sha256": "04e47402222804bc34c30d5f0144d445225069fbaa1ef7ea3c0a4a0530f6f85e",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/download_student_datasets.py",
+      "sha256": "5d39790da270e3cd39528404dc874e6aefd00cb56b445311ff0b5fa29f9e1c39",
+      "source": "workspace dataset tooling (no data files)"
+    },
+    {
+      "path": "scripts/datasets/geostreamfusion_download_datasets.sh",
+      "sha256": "a494546324fbbd256d26f1fe7125aa8516371628997f42fa161aba194a06a524",
+      "source": "workspace dataset tooling (no data files)"
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "uavscenes/interval1_CAM_label.zip": {
+    "source": "hf:LevelsQ/UAVscenes@97f25b34db403f0ae16c0403c5ee567e012561b7:interval1_CAM_label.zip",
+    "sha256": "4ec345a6e5425fc194c62adfa17f25f1af51f8173fd81464af832f498a4c8266",
+    "provenance": "Community mirror. Pinned revision and HF LFS SHA-256; expected size matches original download manifest. No independent original-publisher hash available. Qualify before training."
+  },
+  "uavscenes/interval1_LIDAR_label.zip": {
+    "source": "hf:LevelsQ/UAVscenes@97f25b34db403f0ae16c0403c5ee567e012561b7:interval1_LIDAR_label.zip",
+    "sha256": "4807e5389896376620b9a2ee4658228201e574173bf4ed0c6b2345f810c17fd5",
+    "provenance": "Community mirror. Pinned revision and HF LFS SHA-256; expected size matches original download manifest. No independent original-publisher hash available. Qualify before training."
+  }
+}

@@ -5,6 +5,7 @@ Validation performed on 17 November 2026 using the existing workstation Python e
 - Parsed every exported Python file and JSON configuration.
 - Checked shell syntax of the root launchers and module wrapper.
 - Ran 28 tests from `test_available_selector_data`, `test_reconstruction_io` and `test_selector_robustness`: all passed.
+- Ran 17 additional dataset-tool tests covering download-response handling, safe archive extraction and prepared geometry: all passed. Total: 45 tests.
 - Opened reconstruction and complete-selector CLI help from this checkout.
 - Checked staged file types, sizes and paths: no runs directory, datasets, weights, meshes, archives, virtual environments or private key files included.
 - Scanned candidate text for common private-key, GitHub-token, Hugging Face-token and AWS access-key patterns; no matches found.
