@@ -1,0 +1,14 @@
+# Add to the existing reconstruction environment (tested with PyTorch 2.8.0).
+torchvision==0.23.0
+omegaconf==2.4.0
+einops==0.8.2
+evo==1.38.0
+e3nn==0.6.0
+pillow-heif==1.8.1
+moviepy==1.0.3
+plyfile==1.1.5
+# Core environment already provides torch, huggingface_hub, safetensors,
+# pycolmap, opencv, numpy, scipy, trimesh and open3d.
+
+# Required by the bundled DA3 provider imports.
+transformers==4.57.6

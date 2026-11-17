@@ -1,0 +1,1670 @@
+{
+  "scope": "Source only; runtime files and trained weights excluded",
+  "remote_comparison": {
+    "additional_evaluation_module_included": true,
+    "sfm_boost_consolidated_into": "prepare_selector_sfm.py",
+    "cache_choice": "local version retains CPU device guard"
+  },
+  "files": [
+    {
+      "path": "uav_reconstruction/requirements_streaming.txt",
+      "sha256": "2c051132e77b0f860fe2c3d97fbe464263d40b2c73cbf1e126ea84228a7c881c",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/CHANGES_HYBRID.md",
+      "sha256": "cfa68d2d4cb407176de0b65b3c3b618a30da19a094c912a348f02a7a91f1e862",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/package_code.py",
+      "sha256": "5c653d8dbb70421b7dc8b349e0f08713dcc0d0a05be3c724e147672ecd3dbf27",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/requirements-live.txt",
+      "sha256": "79b9cfab6b5b6eb06b30a74f0efdf17ddd4ac5ceeba28ddff9c365101cf07d52",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/requirements_multiview.txt",
+      "sha256": "fbacbed2ac1c374e773aa7f19c3d091caf295529928d285f9a49e75c8688e212",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/RECONSTRUCTION_FIXES_20261012.md",
+      "sha256": "b288cd88e1d7e5040bdfd8ff05ec2fcf6ba0b8a169dfaaf04bcd4192974ae568",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/README_PORTABLE.md",
+      "sha256": "3fdaa5de047f79cc05f0fd0b87bf057707207260a0c1ba91e3ad3442f794d6f3",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/requirements_visfusion.txt",
+      "sha256": "609ca3bfe9723032088c4ab53c025c9e9037b1fe92a4506ec84a1465c139c713",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_reconstruction_action_selector.py",
+      "sha256": "9229c06be24ffd3d2e90ab4c3626a78f51fae6d53214f1e5f4721daa52c8601f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_stream_failures.py",
+      "sha256": "16150998f0ca739ef57a5a3e35e146de65d50742db0ba80b3307c88927b08ff6",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_sensor_audit.py",
+      "sha256": "ff7d2ef0de986efa1d3714bbb96085a4614dea928aedc81ebe3497b67e7bfad2",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_vnext_pipeline_contracts.py",
+      "sha256": "1e221b254c8c9f95c49cb0cb57d4bed0918f759b321758ffe79e40e1d3413388",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_imu.py",
+      "sha256": "ed399587d2a44245c056fcd6cfe3b3cb65e78d235b363f26ad399519513bd566",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_parallel_branch_scoring.py",
+      "sha256": "2f9dfad5873eadcfbdf192172ab1038599fbef0b69acea75282838f54e7b88d3",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_vnext_memory_and_quality.py",
+      "sha256": "08fcf6f9d06bb8b54eafb570272b2e934a901667263069a1dbc77298238c2d55",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_online.py",
+      "sha256": "ad646b2c32b5d2c29def717715dd4d0c46b1ecba77b4e6d518d20b64888c7fb1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_visfusion_adapter.py",
+      "sha256": "448cc9ce9d4bd7e26b37b71b158c67c97827251f146a8ade79c0bcc0992061ce",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_dense_views.py",
+      "sha256": "3db3626b8d09de6ab5bedd7adf837f48f3fe2ad780685802d624cba0f6463a33",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_stream_runtime.py",
+      "sha256": "81b23f251d880719fe3413d14043675e3df8c36c2d3f25e89bff1a4778cd408d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_training_cohort.py",
+      "sha256": "658aa7c122555f1acbf0d058fbb58b6c734bd5259de1de7755415a79d73525e8",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_mapping_quality.py",
+      "sha256": "33ec5c6ce17b1f6d6097d6b911de16a3c9c62fd0dcbb43ec75740a81335cc20d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_near_depth.py",
+      "sha256": "1b1e4c2be10aeb1ff4d8ad443ef607e3c91220cf0b059026815e23fcc9f2b232",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_selector_improvement.py",
+      "sha256": "13fe4929cfee553aea485c02f5be471c278e8003471069b498a83c6ef4a1f1b9",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_phone_api_v2.py",
+      "sha256": "b20f20d1b6bdfd42d4deb2020e5f1990999ddcfd8931d05893901e7b891735ec",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_hybrid_dense.py",
+      "sha256": "8b8b674fa423d8baf7f0659bb31e285a9802166d28f733a6f988bb6016edabc1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_remote_geometry.py",
+      "sha256": "600beb23cbb87c3a5485c9e2f55f2aa75e5cd967777cd374574fd752dcc03b6f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_combined_reconstruct.py",
+      "sha256": "b925bf01d395b86ae0785db900c9932a2b406717db9571bbaf76325071830bd1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_robust_bundle.py",
+      "sha256": "912da03da918c2de9fdb933e7a0269940aa6f17d7ff22c9d35fd8898efb1b109",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_dense_resolution.py",
+      "sha256": "34a35309e861bf725aa180c3922593bcf41d20ec971dbac185b44befd82b7a53",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_pipeline_corrections.py",
+      "sha256": "161ebda1e121d616f678295f0aa4bf7ebcd08879e9745f2f5917ffb40d3c25c7",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_learned_camera.py",
+      "sha256": "4385c4c072b863794390f1efb6a7dc5d99438352bce70e190116c71623bafc8e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_selector_input_cache.py",
+      "sha256": "a4934c414fc98ae3d359dda5e23930dfd8b2fb77e98f2fb7c27e368a1fafddbd",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_reconstruction_io.py",
+      "sha256": "55e4a8d4c3eda87bdf7ecd7a89ab4e2dcfcdb4be908c0456d330bd002d804524",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_cpu_reconstruction.py",
+      "sha256": "9d8451233ffa87b30e523956bb60419fd98ca1b82543d9c33e9a374cff04b2a8",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_mesh_color.py",
+      "sha256": "9a44c8c427a7904df558ac2f1eeb4bb0b42c22fb03089751f1accb6574834b3c",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_gyro_initialization.py",
+      "sha256": "d4cf6fd6fe3909d793e5fba7eecabc3d8711c38f10d09b961920a375ddbf16a1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_vnext_training.py",
+      "sha256": "507e9206e855fd2881f595250a70d9cd80d335584e63e50fef96c3e1a2202e88",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_selector_imu.py",
+      "sha256": "95ae65fa683196d633daee205d38ef18beea3eebbf9a27d7aafec051a7e1e16e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_camera_coverage.py",
+      "sha256": "2a1324678c26ccc7e4708945870babc65a41e260c08dda27e2f68ef7c947171f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_multisource_selector_geometry.py",
+      "sha256": "fc26a064023ae98f96144050d5881b2117bf1a31f59dbc8cd0fa644a21e1801a",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_stream_occupancy.py",
+      "sha256": "d9695cf246b119036b61490dd339417ff6b822156d44ce504f6b02ebb74c5b10",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_vnext_geometry_contract.py",
+      "sha256": "4ee2573c5013b16aae4327af5904304eb099b617969f2b6416dc3c6faffba3d3",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_video_mesh_loop.py",
+      "sha256": "b68bc14d5e023cbbaef2db656d0d1441df094b4fee14f80f74750e199f0aabbb",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_multiview_dense.py",
+      "sha256": "42cd3db7c2bb38cb962ef1e05602622b8d55b31791ed785d20d7015df0a88601",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_automatic_dense.py",
+      "sha256": "1d23d2270a2ea23d63fbf35e5fdd7d34a0358d947c1eff970fa858124e459822",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_global_visibility.py",
+      "sha256": "23924d773a86813c5d3b5f08c0e1e458a8c79348c33dd93447f1d554eb9268a8",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_adaptive_sfm.py",
+      "sha256": "b025e39f9efcb8f9b6ccd8c4ac1860a6946253cb25479e436357723d43303708",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_selector_robustness.py",
+      "sha256": "219a287961425d2d063961d9860da618350325429f85924da65635c93e8b4ca7",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_temporal_geometry_regressions.py",
+      "sha256": "72b5e3d06c103eb46227d0c42462018a746aa11718eeb139ecfaf337894dffdf",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_session_inputs.py",
+      "sha256": "35185368dc27aa7a920332552ee4f3c5add257095f2d68631e371eaa35ae6d56",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_sequential_replay.py",
+      "sha256": "9ec02f842f067f20a138936d1b363c8e4e55c39d862ca14e7b17d2f660f3c231",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_visual_motion.py",
+      "sha256": "1296afa2fc844a91f1cd1fbb26c5eabd992af3ee19b1b5cb32ae84fa8d03f2de",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_available_selector_data.py",
+      "sha256": "2fea5bcc21ee00cb2cb4d2c6faeb6782aaf2deb84f06aa9f778c7eb4be876fd9",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_colmap_workspace.py",
+      "sha256": "aedc24d6375e9a5c5a0e467d5d1c3f3f3cdfeb1d1ec06a9dd6c2ea38f49a507b",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_phone_source.py",
+      "sha256": "7d09601e3c9e25dd42fcc5449efcb1e7f9b8f34338818fafa2d30ac1f3e6aac8",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_surface_audit.py",
+      "sha256": "6a80a67af21224e0dc245852ffc9c54cad5816006dc0abe28897b2c78a504023",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_parallel_reconstruction.py",
+      "sha256": "b5e2554642c0628f8eb48cb9031d2e31c40f14f952702c340d82724d26e95a39",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_gpu_sfm.py",
+      "sha256": "90a930232faac9a3d17f25628cdc4a9060dd6845d40296958447c24136e1ed24",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_planar_completion.py",
+      "sha256": "2374a225e7ef39f8595557ce6e80d7d749a97e66c7a8e1f6285a1ea9d5b9cf84",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_dense_recovery.py",
+      "sha256": "4c41b36049628d1856284ee7cef6a23c025e9a23f9e0b143370bcbf453ed2376",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_semantic_scene.py",
+      "sha256": "d018e6415612a1568b8189b8aa4baffaed36b27e82f3f84c25a6cceef9e56900",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/tests/test_open3d_import_order.py",
+      "sha256": "27b58391396872e69af5a2f8b12f6483b82462434591d9103e61fc89195b7829",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/configs/cpu_balanced.json",
+      "sha256": "92cf8c2477bd6743618531ebbc2c84125ff4c691114df057889388231421b293",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/configs/cpu_quality.json",
+      "sha256": "b0d5c56d84b88a265da0874ad5ffaaa8c48ef7263ee393dc9f676703f1694f87",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/configs/stream_cpu.json",
+      "sha256": "50dae646d62e9831e27afdbbd0ee619bd79757053905b6ec3e844dd8aa805db4",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/configs/vnext_contract_v2.json",
+      "sha256": "d8bddef37fc8dd70538c5e297cb68f91b2ff73b82037de0360fb1b96bcf65efa",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/configs/cpu_fast.json",
+      "sha256": "b4e5146bd988a19e0204dbd7f9e0c256ec127e1bfa6b0b50e6d5178da721ab7d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/configs/stream_4gb.json",
+      "sha256": "a7606d588c86239e29651d5cfe5fb7d79d72a6ec516de3103c0e568ab9a8c416",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/configs/vnext_contract_v1.json",
+      "sha256": "d75fa88220b66c3ce8f8e6fb36cbb534a9be68de304a178d8cc12ef063f23381",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/configs/stream_workstation.json",
+      "sha256": "b6f2edb3f50cec68c402d41f59c3647da4bf6ca723c4bc3764229e46de09ad3c",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/configs/cpu_online.json",
+      "sha256": "958780b2f92a4463b5a1fdf76b992de4f966b1a6916649af7dfdaa756e491f13",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/configs/vnext_contract_v3.json",
+      "sha256": "28df41aee881d568c95f6a0b11953845068b2e4e5e04437c1094eddbdf263a3a",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/reproduce_controls.py",
+      "sha256": "b5a766fb688772e9a350a927174cb3be6680dd1b70cf5ba904bc0421659644c4",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/ONLINE.md",
+      "sha256": "6d29be37200d1fe161bc20148eb9f056e99d8dd598bb46809985f0efeb23e895",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/robust_selector_policy.py",
+      "sha256": "eb36d10338b43fd732bf373c91e163fd0850fcb9ea51b075583940a594252acd",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/pose_workspace.py",
+      "sha256": "574be60d7e03e0d73008449ef9c65d077ac0a1f7a79c5b4f27229dd98039d73e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/reconstruction_selector.py",
+      "sha256": "137c952380fea1c92cfb7e38a3084abb7a751dabfeba1500d03bd810888838b1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/prepare_available_selector_data.py",
+      "sha256": "3672cbaa7e9872d8dfb7c8518fded6c44c1bde84d5682c2eade17b60ffd70d47",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/open3d_cpu.py",
+      "sha256": "1cdcee5562c58b78240eb47d1e0d26533dc870970efa61058d171441ff14d525",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/frame_degradations.py",
+      "sha256": "fd169275e13c750f32f5186b699a2ff3ef0686d47b6f66bb5a5c6d2728352e19",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/build_direct_sfm_anchors.py",
+      "sha256": "2b61f756f635e3c1cff07bc81aeb6217b7f82d921c48f58838d0b050f45d10af",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/boost_selector_gpu_publish.py",
+      "sha256": "a30fee3236d614808778faa029e23a9fd0ebf10f3d83f657051902a7d1bd62a1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/quality_audit.py",
+      "sha256": "c2a54ac6ce8eac429e8ac4d2f76bd6d64c25394be51b2997ac3411801bba8605",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/graph_selector.py",
+      "sha256": "b2370b0d2a66a652c8d1e75b4a07a5ecd2b75cc73af639ad14d5e03f8d72acc6",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/benchmark_pipeline.py",
+      "sha256": "4bd35da89d59effb8ce5a343ad652130a5acc8615cc355028eed722db82293e9",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/lidar_depth_supervision.py",
+      "sha256": "9a03644fe4a554aa00df89b80e24aeab095fd7991054c7187c4e0bc652cfc3c7",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/adaptive_sfm.py",
+      "sha256": "f91233332871872bd71435a93f0f2cbb59dad5df27e39cff955e687e08227e97",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/audit_lidar_temporal_consistency.py",
+      "sha256": "b2808c52b59cccd253cbc177c369a7230b75122d277699445caaed54ed904c8b",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_contribution_selector.py",
+      "sha256": "1544225f3501c9b5d0b4bbd532f6be55aefd6deb17ec7fb9d31a6d439a4d41f2",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/selector_improvement.py",
+      "sha256": "f218651659073aebb8acf3209cef75afd9caf2e6df24632c9b659fc048afa8e3",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/diagnose_online_cascade.py",
+      "sha256": "ecbb50d54f41b66e59d1a79eb13d70d1cc354902874c58ae0869efed18aa68a8",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/prepare_available_selector_queue.py",
+      "sha256": "5bf80ffbae53111efe9fa3cbd516bf013eb66fe0a7441c062e9e3643553054df",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/select_depth_student.py",
+      "sha256": "0244cb2bdc37b9592a3c22b31312a83ac389272fcd4cd521250789034d4fde1a",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/mapping_quality.py",
+      "sha256": "72cedfbb6e9267dd09ce94228e90d5a9c714edaeed8bd62bf8c41ee9c9ab07d2",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/README.md",
+      "sha256": "62c26821a34ba3b9e2311e9532ba54a87a060f3b1d54467261119691c72f7cee",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/reconstruction_reward.py",
+      "sha256": "5bb19957a1c1d45abc4f2e7dacbf416abc5255c279e3592cd8d1916aa59b4017",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_joint_selector_pilot.py",
+      "sha256": "d892d39502566a829f9ab26b6a17308db1d6c2ec2345498c596d8b0bfabf41c2",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/selector_input_cache.py",
+      "sha256": "345ca001bf530f184b53d7adbb4ec0f6802df63ff2545dca8e11576b9c8601ef",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/download_geometry_datasets.py",
+      "sha256": "94748dd7886e21caee1f07cbba9c0922660a18ee72ad4f2157d9c1c5fe13f803",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/pose_backend.py",
+      "sha256": "335a7ca99c1c91b25d12580c5eb51f687b4b5795f3a9fa9d9f519718a91d82b8",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/extract_uavscenes_multiflight.py",
+      "sha256": "8b5f3388ef9c80deba3e2dc628a3f5f457f709ae7a36138e99defc0934d8cd8f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/embedding_cache.py",
+      "sha256": "a3e29c68887f020ada0cd57e77770a9f0524578eff0d0307ec7bd459199825e6",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/failure_attribution.py",
+      "sha256": "52943ec3bd7911fb888d4a5559bfcb0fc77adf02e1753a8b212a8e02ad7a86c0",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/phone_dashboard.html",
+      "sha256": "0e1497f6ea597d8949c61583295a9a60ff3cb0ac96595e9c07d5954fba7dad65",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_quality_student.py",
+      "sha256": "f63ea9fc827db810f53595b49c206f0e9367d7bf193d752257ec2365d7147446",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/imu.py",
+      "sha256": "97a15d39ee886bd3b838537decdbbaaff779b5066dd8652720f9b7fc499a739f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/dense_quality.py",
+      "sha256": "23312ebc0ad82c3ac1d376f685eb8a5ca0e712af31fb054fcdb0c0e0595f1716",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/selective_tsdf.py",
+      "sha256": "6a6966f8f352ca6da289838885a85ba9663bddc557c9ce60f5d752838608158c",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/plane_completion.py",
+      "sha256": "2378e5bc533f46a756b34b277566359b7b795eb0b2e60ed7e205d6d1688c43c4",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/audit_direct_lidar_groups.py",
+      "sha256": "f50048a39f82e2a88f996cdc9b84f012c114937d6d670c6d9e68f7651877b94b",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/test_online_cascade.py",
+      "sha256": "7c506c089c155568a23a52bb35009586f98017046cc3282f5634294509f8468e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_reward_selector.py",
+      "sha256": "cd505891acce28db6aefa7f47e43e869d45faa797f74d74883292f28e59bd8eb",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/visual_motion.py",
+      "sha256": "8796829ea711bc92e46a6ab470dba38edd48ad437a6e05451434ad9e602c8ae0",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/camera_coverage.py",
+      "sha256": "392d077b6d5df32079a09c8a2dfc4d96c8194aeb13182514a39b052e775bab82",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/semantic_scene.py",
+      "sha256": "19d7e7520ce91619b9b471fad3621c1d27a0931098f851dd724c9277336dd67b",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/build_uavscenes_targets.py",
+      "sha256": "67b3ac3cc6f534ec2128ea41c754025ac1af95ef5d07b755e45ed4093e718695",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/incremental_fusion.py",
+      "sha256": "60da53a9fe498d5a07f28734cd080e5550cfd64ac1504fa524df4a843bec87b7",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/label_multisource_selector.py",
+      "sha256": "62a08c4faa3bf8e088c19a9138c041a0ceb3e37f54c2de6128a711d6427e81cd",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/scheduler.py",
+      "sha256": "3ac12c3eff6dff8c05c3e2740727a1627cdc1e37efa8d77fb748b27a8b0efbda",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/multiview_dense.py",
+      "sha256": "1f32c5cf410cb4343d4680519138fe71c0bc9cef4985ca0cfdf9d77e3b1273fa",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/promotion_gate.py",
+      "sha256": "2b526081d7a449738ce405f47514403c7808e360e162de61aab10bdf2411ba1f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/remote_geometry.py",
+      "sha256": "cf9c49bc02bb68019f84bcaa441dc40452f67f5733334d3cd959641603506460",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/prepare_multisource_selector.py",
+      "sha256": "42a6d307da92b964086a190558c945340088e8116e41252ba02b8f320f7416fe",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/mesh_color.py",
+      "sha256": "55099e21c1c78b7672eeb90f8fc93a8c9b37a1433b4110cdd399a3a152920efe",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/session_reconstruct.py",
+      "sha256": "1dc513d57b0555e8855f6a325c7924ed63590875d0611657f196cf8d98cd8d69",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_depth_student_lidar.py",
+      "sha256": "bc4080afb557caac0fee3346b2267181a4c7f8679d024882c0d7b9e2211ddb92",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/student_losses.py",
+      "sha256": "4f1c92d882e6b240fe9de2832b2a7edfdf8f3012df5727037c8a8844ae249e39",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/selector_imu.py",
+      "sha256": "b70e02d5414f2a3c92936366ac3266af59025d6321699b9512d24790d4a73a0c",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/prepare_uavscenes_clips.py",
+      "sha256": "a8e6a17f0351c996b3b4af51b251d880a51a88a78af5a66e0f3be2f5a222ff17",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/selection_swaps.py",
+      "sha256": "5905ddcf52129a45efa9f70dd76e070c61cafa6d74d49576bff293ecc4cead9e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/hybrid_dense.py",
+      "sha256": "2597fe0b7d62008e5c8116a7c1eed3459b5bef87810ec45921eab9785254d94c",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/quality_video.py",
+      "sha256": "4dde03014defaea88cf61c62d02b909e9c6b47beb5cb98c90d82fc77c5c294f9",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/gyro_initialization.py",
+      "sha256": "2f3473de5ae0abcada1e553cf553e11484926887cc37d106686c32f0e4cca409",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/quality_reconstruct.py",
+      "sha256": "be4a85b703f8dc16c9c2a1558097d009280f17c867b5d95af316c0a8765d9db9",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/reconstruction_action_selector.py",
+      "sha256": "2613ba3947efcfb4de20531349fbfae4a612e4b445781b420418670744fee11b",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/selector_features.py",
+      "sha256": "d3b42de74b589dce5c663cae4896046298ee9dac80df937fde647f7a2fc61432",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/model_versions.py",
+      "sha256": "5952520535c2371ecf268c1cc084926aa643941cc4f3244005aea7db39c82c3f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/runtime_metrics.py",
+      "sha256": "ca27e3bcd46c1fcf8910d9c9a75d1a879a820c444fba302934cfdeff74459f18",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/preview_mesh.py",
+      "sha256": "dbb7b2f626d157e67c2e6fd2a986a9bebc40274101031af3d658975bf228b9ec",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/quality_teacher.py",
+      "sha256": "c56fe62acf0e66cbe4ed09e18d00541ef5bdfe5074f47a567dce9287db1fcde7",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/student_inference.py",
+      "sha256": "fe063a0252878852350471c89331662cd1973bcac60067c9c69b08d2cf9a6c7e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/sfm_dedome.py",
+      "sha256": "144015f5a89ad4ae4e81f073de6bf37f5611811015f000f33699d489ceceeca2",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_student_update.py",
+      "sha256": "7500718eb3eb75554fd6f1031489e6b86e1b15cf8820c390a3b31bf83e2c5425",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_graph_selector.py",
+      "sha256": "51bb58f0196d7f3989b1a4cb50575a05033d582017805074dde0fd67ec5d5857",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/evaluate_vnext.py",
+      "sha256": "3e8c40046d17d0e4094b61bf359a5919c5700620e730d94a46620a9d2e180b9d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/session_inputs.py",
+      "sha256": "cadbd33a7aec26aebe24fcdbb9595824d366d4100ee539379d96b7f090f8e3c3",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/global_visibility.py",
+      "sha256": "b9043bdb85beebf618f5c2acc4e5918484ab47663d11e44dfa3fed05abd1b67e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/RUNNING.md",
+      "sha256": "8633bb15145ad80516b25b20d95ef5cf6a1337fde0deb3f25ff8e9b3a791fa7e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/check_online_cascade.py",
+      "sha256": "8772700deb344a1b83326e4e5406c9c8a2a4ecd75bad87432c14c2db75c85c5a",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/keyframe_policy.py",
+      "sha256": "29a3663c4cbb51f9b3e5b225e533a159638badf3baa539958aa8b1beeb7b0ace",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/reconstruction_quality.py",
+      "sha256": "cd28d63f9f79799b5ee17904ba3547f3a9cd9da3a38c09f96af9de82af2a1a9c",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/validate_reference_geometry.py",
+      "sha256": "9d4feee8e39c48cb4c370c45f04a9dba2c420f036303a1eb5dbf70f20cfdf837",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/sensor_audit.py",
+      "sha256": "8a8ebabf2cfa31f06fdf6f74af93b3dee51d9c81a49fd58159f84a780bd63f7d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_visual_selector.py",
+      "sha256": "2821b4f857deb9242e95fa4315551ce74a001c852f04036c23f435ebd198f999",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/color_mesh.py",
+      "sha256": "291ef0f41412b47a1d1c9cf2831ec33ffae1516570c86ed7d090afb84bf195dc",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/audit_effective_loss.py",
+      "sha256": "3e04ce1fffb00f011da3b1ac6ee27e4063176a5931d411a15e3902d03963861b",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/trusted_sequences.py",
+      "sha256": "f7c73045b3a66cba790f8d47b110804dd96c6ad02e8ffa31e8f9d7577712b42d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/student_dataset.py",
+      "sha256": "f8353d14c553ce79a798eff65bbf1aa8a79ffa19b647ab33458c3f760a92721d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/prepare_selector_sfm.py",
+      "sha256": "3ae46915186c5d2dd81759eebaf6acd0a6250d1e0e3ac8f256cf18b1cda05020",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/diagnose_students.py",
+      "sha256": "3ba4ce554fbd150c0649ae29b8a4b8dcc4e27359ea0a618f8b560493bfab2ed1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/reconstruct_training_clips.py",
+      "sha256": "90fd166961cf79ab454b337068bee2730894f8317a63fcfea02b9cb8a9e8f6e9",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/depth_student.py",
+      "sha256": "be2f5f4d594b54d7efacb3b20d47f177c43438d03c845a70df0d4f04c323c4a6",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/prepare_selector_sfm_gpu_impl.py",
+      "sha256": "0841e8d38dc281ee9b9a56eb4d709d446587d78490b811e9ab72582e5d2ede80",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/sequential_replay.py",
+      "sha256": "e1f505a8ea67d75cea84a4da67ca95bb5b2a6d4e6062fde5cfeb83aaa7715f82",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/prepare_large_selector_labels.py",
+      "sha256": "4e0f6cfa6551a5eec8a39bd606aaed3f0168f1a914a4860cc8082acc75bd892c",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/pycolmap_backend.py",
+      "sha256": "101068568538db797ce6e833f45cba01a64db7184a22950d7fb6b230fc83c572",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/colmap_workspace.py",
+      "sha256": "dc3efbffdd9efe5dab529144edb3f06f016e8268b7bc4a44374c4aa01e176c72",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/gpu_sfm.py",
+      "sha256": "6d4f9fdeb15f89769ecd762def0dbb4cdbdc3925871087313ad98c262a6dc101",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/supervise_available_selector_data.py",
+      "sha256": "109556fbac9475efb325a178299039323d21b916933f46a7e6d10c72564bb861",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/boost_selector_cpu.py",
+      "sha256": "f972f55ddd5ecf9e9505cdb309e9f90512d90a5fa44e52cfc9f9b43450f1a70b",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/dense_resolution.py",
+      "sha256": "393eae65f83aacef963fdd6780e0e7fcdb6694a4f0bb6fd22c85783dab4019dd",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/audit_direct_sparse_scale.py",
+      "sha256": "8e12dffa2a9a63c0bd41c12a91dbbf2994edb534d9a9fa5648ec982ab60c5500",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/prepare_available_selector_geometry.py",
+      "sha256": "37e7bae2b8bf94d69e4f214cd1fb70115fdde4b1b0619d1ac97fdec71acb52d3",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/fusion.py",
+      "sha256": "2313b6a099f4b3fe07e7d0c11819d91064e4b534d414bb88893c9fc70e9b59d7",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/plan_overlap_depth.py",
+      "sha256": "e4b6f5c0084ff0d03d46dad28242bb915d462ae8f0f859d5c8a3ea81749ffdfc",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/types.py",
+      "sha256": "c7a9ada1d0d6880c03753e9facbe1e587e74e5e9ecef38dec16e79bc54590e70",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/selector_corruptions.py",
+      "sha256": "e1617530907b62288c1d756822b6d3b1096c2e7804a6e54b03a6dcad318bfdfc",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/reconstruct.py",
+      "sha256": "b79aace02f01cd2077e49b888633d39162721969850285959675098dad874d22",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/contribution_labels.py",
+      "sha256": "9c2ebdb9beca59c2425a1b711f5590faa67c837fb9cfef62b935def621b08761",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/depth_cache_io.py",
+      "sha256": "4b572edfa56cc1a42dfa8e63cf048094dd10e0f507543bae9cb3999ce809905b",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/build_calibrated_targets.py",
+      "sha256": "5201e26d63e5e524857e850cf2c286e907ce784ede585f62385e173bcf175e92",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_utility_selector.py",
+      "sha256": "841c2bdc466490aea00479fb71fd75081bc79eb4ae32720c30e51543f2d18e44",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/online.py",
+      "sha256": "ae8f7ba155f09e301585d6aac755a846bb6be81771bbf5d017a2d778884ce8b3",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/planar_completion.py",
+      "sha256": "6e26626bea8106a01e7d9752af4d990b2987dd3cf0dda030484016ea4fa2a8c8",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/fast_session.py",
+      "sha256": "deed95172d0a6325c1adcba467279b903dc27cfea245fbc505195561ba9b02fc",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/temporal_depth.py",
+      "sha256": "03eb07fb9573599e65a94d38285543d5fbb0090b5f4de34f87068114a5b25165",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/camera_orientation.py",
+      "sha256": "b27eab769acb1ea7d0b3ce591e918f4a05a8cb124a1d37632dab4c561696fbad",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/counterfactual_replay.py",
+      "sha256": "9fb224a88e79d8325a0506c82de1fb3c9fcca254a0f7bdf6197b8f1348737bf5",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/freeze_reconstruction_baseline.py",
+      "sha256": "99c0fcea76914b5227190548430c7ddef54336e9c8e89ca94cdbf21cd3d952d9",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_overlap_attention.py",
+      "sha256": "9285074654b621a3d82dc730502ab3f01376d2b8d71a28acbc4008873c958b67",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/selector_policy.py",
+      "sha256": "35626d95a9160709152cea32262925522555b7da000bfe7d622536ba5cd5697e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/build_utility_dataset.py",
+      "sha256": "10ee7d17624cb5658bd9e4f1481a95543598206fb19170808f49ab581e8d3992",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/runtime_types.py",
+      "sha256": "d45d31c130fa2c5222f3194b2db419b7e42e18c65b94965a6aacbcc9dd7ebd21",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/selector_candidates.py",
+      "sha256": "44986c73bd64c5a84a0834bfe73290152b7d9d29d8e0754ce9767028987e7ade",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/supervise_complete_selector.py",
+      "sha256": "e835bd83b2500ac2ee2028698c5d04ee677151f504f2d285d04ff96fb60f6765",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/depth_normals.py",
+      "sha256": "9a93af993fc527bc5f95297de6cd6d738018a89600e67b6382a187469ca8f6f4",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/PHONE_API.md",
+      "sha256": "d30432b925023f751b2609b8f58505e254e96efc39c2e0dbfd7b5f1ae501ca02",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/refine_recorded.py",
+      "sha256": "ef3615467c79a8c865139e3e10fee56cfedebf39fb4d86d8c5bb7806e534edb4",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/surface_audit.py",
+      "sha256": "971f488acd9b7679fb687e13f58861aa3c72192705895a007771d75fe96c5470",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/utility_contracts.py",
+      "sha256": "d5ae20ec11600b67462cd85f55f44e4940bf65dd0526969e97dc72a2d26e95ed",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/register_lidar_to_map.py",
+      "sha256": "9b1e0c9d4bf8018bd342582bdd0bedbd7e6153df0f5ee5a17fdf77e0b9ff148f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_large_action_selector.py",
+      "sha256": "ed3aea5b1fa572b009567d17239a249bf5de43e53d70a1c3ffda649c4c91206c",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/frame_stream.py",
+      "sha256": "e23d1094ce2964829489c63843a9e11f6583a40e01a136a3a08d7e4a2971eece",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/bin_memory_selector.py",
+      "sha256": "342e5a30ca7eafa76fe01b778b98c1c326866d31fa5ea1ecf03b1fb82e3b9292",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/stage_cache.py",
+      "sha256": "16e15a2f704913709fd0ad3e90bd7fbecac8b6fc02fb371bea713f1f7dec4a4d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/evaluate_mesh.py",
+      "sha256": "689815d8129d011d7af4b46e8fac8204c0f929d9f90657e8c867f866898d16b7",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/gpu_selector_sfm.py",
+      "sha256": "7ce678322cfc2d12dd33f42767b7e7ed85c2b83d9ed4c5e0e4c7786f7b8cec8f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/submaps.py",
+      "sha256": "0810854cd37296fbd67bb78003524606005b53971a69a0fd5cca72b6ffc91af2",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_recurrent_depth.py",
+      "sha256": "a44881cbb96e88b54f5d032e8b3310975a2bd0f5f19c8fbc036591d5f08c9bc1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/stereo_refinement.py",
+      "sha256": "9947d8f7f3325d5e7b2be62de98602e0fb46aa3aad6a46ebc77dad6198e28fc0",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/build_cached_lidar_targets.py",
+      "sha256": "c4124a3a3dad0f7748798314fcb1ef422426c5ad59bd3e118898f0a06f7cc18d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/timing_report.py",
+      "sha256": "7e8a37fa4fe2371aceb9c9b44d9c0f4db3856ac0ef0b170cbd7169e8489c0057",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_frame_selector.py",
+      "sha256": "4f1dc6c2b0fcb4bdce4b30965d6240e0788709a18542840451ba6692176809f4",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/test_depth_supervision_geometry.py",
+      "sha256": "92973914d0c1e7f97bdc716cc1175eb3b3e9a5a88cc8c40971a2b30afcdb3299",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/pose_dpvo.py",
+      "sha256": "dbd9ca16a8be86f74a059665eb9de9ef13bf1053832318bd9a95a34426398b67",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/benchmark_lidar_student.py",
+      "sha256": "84e90663c87a5bbf931434c7f033f717d3ca43f294ae23eb244f308b55cf5f37",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/local_selector_cpu.py",
+      "sha256": "4bbd5001a2869fd299582799fa6266220766c443d670c1c69233c77c9d131fb3",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/stream_viewer.py",
+      "sha256": "7c479b0a6aa7911cba7edd33765616465de8953f064bd53e7f5f6ec5f15e9ba1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/learned_camera.py",
+      "sha256": "4dfcae40c2077afdeb57777b369043ed92e20fad4cd555094f2ed7adfa941490",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_selector_improvement.py",
+      "sha256": "f1220bbb147597c900d4ad7fed8ba3748ba84e1dff93cc3230fc95629959cb3f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/recurrent_depth.py",
+      "sha256": "82a835f74e215f8b5f4b7cc94820675eed2c3046c51ab6513b9b9824db55c0b9",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/QUALITY.md",
+      "sha256": "67160e9ecf0ef22f3d858932a3d4501eae10161bd3a17c196385dfed1d45baa6",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/overlap_attention.py",
+      "sha256": "342114f297dcc7b9079fbc14d9296584f90802d296091981502f989218eae8d7",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/synthetic_stream.py",
+      "sha256": "6c7f0db3f5d27954a5bbb526b843be240b233ef6f8d848107a90cfae1539d265",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/__init__.py",
+      "sha256": "6bd864f49f8d350976d66b669a4e6103a945f9c061dc8290d34821bef953408f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/finetune_selector.py",
+      "sha256": "2608a1fb8c781530fc113c56e3b5d872277e174d4a275ab2eba4dc5e8cb2dfae",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/template_overlap.py",
+      "sha256": "78ff0dbfe5337f173f2c35e734b4a4465b6690a877b7cc4b1494b7fb6cb96284",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/evaluate_large_action_selector.py",
+      "sha256": "c4c7776e3befb40d23a45bf76efcb01156b42892f91bb6b0eeb9a91568bca1fa",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/dense_coverage.py",
+      "sha256": "87a44889bfd39b9c40f80c4ac130df3912b8efce71ba29494783e3576390e640",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/pretrain_visual_encoder.py",
+      "sha256": "cd6f035fae59d220b03a8df45a098d63475e843bbb27869f20922f3ea4d02b75",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/extract_cached_lidar.py",
+      "sha256": "610179460922e24e3eec2725f9a342b991bbbfb985a04b9dd31e636948be123b",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/pretrain_large_selector.py",
+      "sha256": "41dedfe47f3c7681c935ed51a94040c0c9b98da70c95f6daef40e196459667a6",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_differentiable_selector.py",
+      "sha256": "5021851b0ee6b48c1b747ee973214f40a46c5c18c283232d313456dd025a6542",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/phone_live.py",
+      "sha256": "1e0648426b2ce9b984abaf5557645113d9bf33d899b5791483f260f9fc5ff6d1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/combined_reconstruct.py",
+      "sha256": "19d44f1708da3b16b8ce39cc7465309f789a2bed0cb998368fe941fac9c021f4",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/visfusion_infer.py",
+      "sha256": "a4eefde2d037d0222760e598bde232c1b937c8663f7dc082751ea770b98b9c5d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/calibrate_cache_scales.py",
+      "sha256": "bcef502d2631cc96a6f4b6306d2b6a97e754502fff5c58b4b7478435a6bc9477",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/compare_incremental.py",
+      "sha256": "483ac4301fd5e018f8166623d5630c84ad8c15f78e63624901f795b34c8fb16d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/dense_cuda.py",
+      "sha256": "929003e465ddcc510e1f538ab5b5df0c8e082b0041d99fc7080e3aa3a54a0da1",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/dense_views.py",
+      "sha256": "ea56e025b44dc31ade544285a98c93a4a55d2720ec01d679c9cf2b8820942f2c",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/source_view_labels.py",
+      "sha256": "cdaf14b65f7165bf6f727bedb41b6902527e0697af6eeb362b38c0b4d907edf7",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/pack_student_frames.py",
+      "sha256": "cbd46fa11313826d5028e15caadf5305d1a12f2df18e8ad846bad383e521ea40",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/runtime_cli.py",
+      "sha256": "c054fd1eb2fe9b6775e3c236260729c98878ad6713a24b1f61579ab5a88bb383",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/recorded_viewer.py",
+      "sha256": "3dc9bd734998f89d90057190ff560562c5b7fcee172aec71cdeba006b7e13489",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_complete_selector.py",
+      "sha256": "f2569d6afc5da021c81ff755f1a623ce02c52da5dca97ff1a9385ba429adfe02",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/audit_lidar_alignment.py",
+      "sha256": "ca71738064a6b16264567f9f449077bc0f30331c5e32071248233ee72a7c2481",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/final_reconstruct.py",
+      "sha256": "adb755fbeb2a094e0bb30e55bbb37c0f73fe475f9e27edde4e1e6c85bb255d11",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/large_selector_model.py",
+      "sha256": "414367e9b7f06946a6456b152de7242094904d4e3399f6a13d7089560ae1a1bf",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/extract_uavscenes_neighbors.py",
+      "sha256": "76ba3758a331ebae5cf78a4a4f162baeca05fa4b7f681dee4e7ee984020f7758",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/quality_student.py",
+      "sha256": "277fc2947216528da2bc388dd802b24e15a8ea90430b2dfa7c3ac6de5972ccc8",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/profile_online_cascade.py",
+      "sha256": "c65816712f9a9e9ba9aab9605b9c8aedc47c2d8b2f05de564f3b1745bcc67650",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/sensor_coordinates.py",
+      "sha256": "697b3f295194925636bd9ccdee1333bb59698365056716b960e8a50b0ddf9c5a",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/temporal_depth_student.py",
+      "sha256": "a96236cbc7bd13252140102024f39f10d8d321211f4589c3dd2ee3e42fa3c85d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/eval_selector_checkpoints.py",
+      "sha256": "aefade171e6a89481ee27e26598e5dbf77d2c75b852f36a7b7f2b57a6f456ebe",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/occupancy.py",
+      "sha256": "95ef5fa61ce37a0fd85fdd41add090e3304c32aa3900264e7a8685b6e5fd83c8",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/geometry.py",
+      "sha256": "2c4d02a2984a7fa845e728aeed336a54b8c927fb6b783a1b1b82bdfea9288a94",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_cnn_selector.py",
+      "sha256": "371d0c432072b756c2de591046ad0d16ac8da8a065a364dc8bb047def95fad74",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/phone_source.py",
+      "sha256": "39ef62ed8d7df8232eb03db608cc425bb3138aa0d0f043e407e9d77222950eea",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/audit_student_datasets.py",
+      "sha256": "15b921f436d59400d991983bcbd40243f72a3727fdebda314d0f8e2d95a39441",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/supported_mesh.py",
+      "sha256": "5cc76e4328b6e8a34c16d8bcb49118e01fda72ac8b4902a3dbb24b5f1e15633d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/mesh_viewer.py",
+      "sha256": "107e81558be1098d27bfbc940e8f6858ee3efb713e63e8bb3920c37c63f5ea1f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/robust_bundle.py",
+      "sha256": "72adb841948d93ed4ac3b0149ef11562a9f6af30c5812b598ff8de1c48e3ae2d",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/depth_backend.py",
+      "sha256": "3c89b5a7cd7d084a0e07b98b1a3d1aa82973f1fd85edf0a06db47bfa76b3832f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/memory_graph.py",
+      "sha256": "f302cfba283ff55001422f1b48edab05f1b3a8011a4c49f83d2cf5341fc18c86",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/train_depth_student.py",
+      "sha256": "8476a44c5974544a09fcd2b2bd49d7233cc0bd65f8fbbab67e5ee3c1db3d5b6e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/dense_recorded.py",
+      "sha256": "2b19ab2ff6e97205ccea9b94e7c644f47480aa2cf4a3bcf3d4761ac27f93deea",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/stereo_policy.py",
+      "sha256": "ffa6b2df03dbb83a408fb7a65e07ee05f0f701aa553693d6fc27c3f68789c32e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/runtime.py",
+      "sha256": "c90e4dbdf2724d1572ef0adce628b96da1743a33af4d058bde351bd787c80359",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/pipeline.py",
+      "sha256": "499b21219ab088382f5e9de9731628a063e30d78629934e63dd77f6af212be9e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/direct_lidar_dataset.py",
+      "sha256": "7a6201f6491fe1afe8af974f576bcd1d91d0e3e088fdb4196efa60da7076f5aa",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/06_export_glb.py",
+      "sha256": "f578a920b2f4dbd3071a4a1ce5697b51748acb1e398073082721615acd311037",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/05_color_mesh.py",
+      "sha256": "78b37ab2a2f2ca3b8901a678e488729771468e02169b9584f41f9e4fae2c1006",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/check_setup.sh",
+      "sha256": "759d2d2d55cf10f758781a3b28ccf193eb677aefcf573fe3224b295df9516347",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/04_openmvs_reconstruct.sh",
+      "sha256": "c144c77949969a552b455afe613729d0df8583e9317b57071a78b9efcd461e46",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/07_sync_gps.py",
+      "sha256": "52a35f74e960642cfaf8bcc90b4dc20855a732b7635cae4610265746803e9e64",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/08_georeference.py",
+      "sha256": "277a2fd2acca11ffa5fb5cfc2b6eeb2512644e0b907942b28e7b532f9e834967",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/10_simulate.py",
+      "sha256": "db6b3d8f13bb62fbffb32d6109e8cb4bacb23826077dd89f47324b2bc9f14d0a",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/env.sh",
+      "sha256": "dfa9d715a8606a814345f10b8831c14f523a7d55574dfc9f1432825ebacd273f",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/09_apply_georef.py",
+      "sha256": "104d9ad260f33941c894c8d0e6b3736673f1dfcd8d577fb9c9e0d0c77e82ba79",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/03_colmap_reconstruct.sh",
+      "sha256": "a6a7d23fe7db5059602f528b24177acccd769e404643061be9456f0c7469cc51",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/10_simulate_mp4.py",
+      "sha256": "bc4bf8706c8c5ee6f19692d19d61566a434a987f16e9daad7d004b853c92b331",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/simulate_session_glb.py",
+      "sha256": "54e400b6504f44417bb34a49d7de28561f509b79932ff3b327fd7a2e205d9150",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/02_segformer_mask.py",
+      "sha256": "7f2044148b02da40730da48502229f085b6224274b0cbb81caebcbccbe2354d3",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/drone_telemetry/scripts/01_extract_frames.sh",
+      "sha256": "47859d807010a3e89a3497915008cb61dee98aa7c5f0576eb4c9168d8aae0c15",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/apps/openMVS-source/COPYRIGHT.md",
+      "sha256": "87663661db85017fad4773f3744cba9ef315a18c01b400785990addc47ab2123",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/apps/openMVS-source/scripts/python/MvsUtils.py",
+      "sha256": "cc8c1c56a09cbb937c8a522d7ef10eaa715ae572ad07f4658966fad70cd8dd54",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/README.md",
+      "sha256": "4f445228d6c16d811d8715b6ec94a2d8db48cc0b89cec1dcf5b85eab78814752",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/GEOSTREAMFUSION_COMPLETE_REPORT.md",
+      "sha256": "d1a0aa145d81555c4cf0f68492168cfe914029e79a0c627ac973c66900743ea4",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/analyse_picks.py",
+      "sha256": "eb0612f762e6f6aab9fd4dfba420011e2ee3cc9fe74ece035b93f291aa99e076",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/consistency_test.py",
+      "sha256": "c85fc17e812ba091dad989112e4c4aa87b22c6d6f5d9fd0d34035f04d88e75e4",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/drop_test.py",
+      "sha256": "c161662ee9e2a29cb4efb12f3bdca643803a1af24041f44e22bd58af44933ffb",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/run_stage.sh",
+      "sha256": "7b383136a95e76195272ef25683133717b8480d8022bcf12b0689035b2b8927d",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/run_greedy.sh",
+      "sha256": "3dd6dfa039931cd54dd4b5e187af957dcaa5c731906709e3f90d391ad25a0e68",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/depth_error_selector.py",
+      "sha256": "3af5a5c558d13570009b40583883ba95df865446ae2c27fc0008efdb4c534318",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/run_conf.sh",
+      "sha256": "d3f9e65082c24d4a49dc032b637ea1d1db5e0bdaf98f538744a8fc2003e6e0bd",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/run_depth_error.sh",
+      "sha256": "b3f1467218cd0ad5d5e07ae91191bc4d13372a12179917e1119263a497286898",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/selector/greedy_selector.py",
+      "sha256": "fffb361636d54ed8ceba8ba3c32516f61e927a12c4c4ab33b3803bcafac804a9",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/download_dronescapes_subset.py",
+      "sha256": "6a18c04128a746bf67127760c301388250ea722c380f1b3c813d2592c003b9b9",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/finetune_video_mesh.py",
+      "sha256": "9df2732855377c2b0f867b1db5c1d977343d09b0cbac2d7f7ad9b11a62a37409",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/train_robust_selector.py",
+      "sha256": "c719e0d2a8949a31f27555c53901186412e844272a7f1977b552e97f1ebd4b24",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/recover_test_camera_initialization.py",
+      "sha256": "a524b97297e222f5bcddae2d3caef701753d02c775becbd97594f9f6d6432d04",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/smoke_sequential_cpu.py",
+      "sha256": "0d22af791c92951ff9cfa60afef6a19e96a07e72436a2fed617f297305dabac0",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/serve_mesh_gallery.py",
+      "sha256": "f85a438d8139b8d83fa12d4349ac7d3079d9850c7c8839e230bb7b71d167233c",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/serve_uavscenes.py",
+      "sha256": "4bbb4dc1ae37edfc3eae0e4b1dffb11f81446667f4d6220c6bca677a0b7efca1",
+      "source": "workspace"
+    },
+    {
+      "path": "reconstruct.sh",
+      "sha256": "6b406956ca3fc7fbcd139aa203e0814de8640eb8758663beab30a96dba7f824a",
+      "source": "workspace"
+    },
+    {
+      "path": "reconstruct_best.sh",
+      "sha256": "c5bcbab774c7c83477d7b918fb2568716dc26047409780a516892785a7a73a08",
+      "source": "workspace"
+    },
+    {
+      "path": "reconstruct_combined.sh",
+      "sha256": "4d3ef6adaeb94886098956c9f3b6493e164c8de7086e9dbd806c9d393b0e9289",
+      "source": "workspace"
+    },
+    {
+      "path": "reconstruct_final.sh",
+      "sha256": "9286e7a8d8665fe60537b084fe1e77ade42a2ded863e595763f769628b0b1d51",
+      "source": "workspace"
+    },
+    {
+      "path": "run_complete_training.sh",
+      "sha256": "eb57604372abd7b3b4929343cd732101139968fac0582598a8f6b1a0cd335349",
+      "source": "workspace"
+    },
+    {
+      "path": "run_lidar_student_training.sh",
+      "sha256": "91c54d3171ed6c5a6f2340806e837409125aa68d5d91ceff9655f6950490e9bd",
+      "source": "workspace"
+    },
+    {
+      "path": "run_neural_fusion.sh",
+      "sha256": "c46e0b51fb669861613a037de479efb777b1e6804add9cc217f4bd0b25ff086f",
+      "source": "workspace"
+    },
+    {
+      "path": "train_depth_student.sh",
+      "sha256": "68da8caecfb95da43cfbc377f0e4d8fbbb2d891e6f668e46130109066da8bde7",
+      "source": "workspace"
+    },
+    {
+      "path": "setup_multiview.sh",
+      "sha256": "b9c30ce177861ad8bb829a0e06ce73ab252552cf1d027cb3c444a2c33f8a1738",
+      "source": "workspace"
+    },
+    {
+      "path": "setup_final.sh",
+      "sha256": "3eb41ddff1b5d36341f7020bb49db8ddb3991f8fc9f39a49f8c216f213ec4965",
+      "source": "workspace"
+    },
+    {
+      "path": "tools/setup_streaming.py",
+      "sha256": "c06a1bf8ef5769579b89ca8703de63cdf1ce0c7d3bfd6e6fb8b6decdaa67ac74",
+      "source": "workspace"
+    },
+    {
+      "path": "tools/verify_gpu_ba.py",
+      "sha256": "3bea0fcef1e1afcecea2b0b4c848fc3ace0988993f4db4bfed1fc3154b0c324f",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/depth_cache_reprojection_audit.py",
+      "sha256": "9249edc2c684d6de446a37c65359a7c69bbdff6171290055a1f5da7188bdbe9b",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/hybrid_failure_audit.py",
+      "sha256": "250e8a4e4adfc249c9ef06e2b47284e7bc2ea7daf4cd8268f4b5a7926e845557",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/hybrid_spatial_audit.py",
+      "sha256": "18c74d06f7c547b3c324d855f1892cfc5b9e815e84eb0b721260bd909eb7d05b",
+      "source": "workspace"
+    },
+    {
+      "path": "scripts/motion_depth_audit.py",
+      "sha256": "0fe73567ada528f345577953c534a935045054b869ca7de3118e585fd2993788",
+      "source": "workspace"
+    },
+    {
+      "path": "tools/three_0.169.0/three.module.js",
+      "sha256": "0a3368c165eea773490aec7b77c22de70e3eac288503409256fdbf4d12578416",
+      "source": "workspace"
+    },
+    {
+      "path": "tools/three_0.169.0/OrbitControls.js",
+      "sha256": "80efaadea4f8a636a65fb0bd08bfef62f3d93a0bb94e2e7500f23176c5c07f4e",
+      "source": "workspace"
+    },
+    {
+      "path": "tools/three_0.169.0/GLTFLoader.js",
+      "sha256": "6f1719dcc6a179d30273dfb0de07a8c898a7981f7b08e600b446387f5967371f",
+      "source": "workspace"
+    },
+    {
+      "path": "tools/three_0.169.0/GLTFLoader_local.js",
+      "sha256": "5bc183f5f98ebcd9e98c18977dab4a675db9fd8a6bcaa5d84898586033bb9979",
+      "source": "workspace"
+    },
+    {
+      "path": "tools/three_0.169.0/PLYLoader.js",
+      "sha256": "9361ab8f82e88f827f65f9800b1dc8cceea5f84be81b3815afef502bfe65065f",
+      "source": "workspace"
+    },
+    {
+      "path": "tools/three_0.169.0/BufferGeometryUtils.js",
+      "sha256": "c25b7930e570e9ec56173cd3b866ec8d2e10016630db3937efb439daf1cedbf6",
+      "source": "workspace"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "062d2c323c810d32d308849f84aaced1fc8a5bc190cd72f68d2f6f899e8400c2",
+      "source": "workspace"
+    },
+    {
+      "path": "docs/implemented_pipeline.md",
+      "sha256": "988fa98d0b75ed310374a1f6187bf13050b6f9c42e5758fcb21d893a1952cf71",
+      "source": "workspace"
+    },
+    {
+      "path": "docs/datasets.md",
+      "sha256": "55efeccb288cf5825407227408f4b32fee3b2d01fcb2681f68af1d5ecc3436e8",
+      "source": "workspace"
+    },
+    {
+      "path": "AUTOMATIC_RECONSTRUCTION.md",
+      "sha256": "5e74b6eed284e3fa7078f2ec7f7dca77fa42329ca87269150ea2f512f4cf029c",
+      "source": "workspace"
+    },
+    {
+      "path": "HIGH_COVERAGE_RECONSTRUCTION.md",
+      "sha256": "6448001d8f39c68f8c781330a4cb15c06f242ca184fb689cf43a85dde914370e",
+      "source": "workspace"
+    },
+    {
+      "path": "uav_reconstruction/adaptive_uav/eval_selector_reconstruction.py",
+      "sha256": "d2ce997bd641b395bb3e41e4257c3dd7c04f8a67435acf15f33ee7055a1e6e3e",
+      "source": "remote evaluation module; dataset root made configurable"
+    }
+  ]
+}

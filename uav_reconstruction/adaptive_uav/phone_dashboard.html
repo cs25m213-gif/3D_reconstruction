@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adaptive UAV · Live COLMAP</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0e151c;color:#e2ebf3;font:14px system-ui}header{padding:16px 22px;border-bottom:1px solid #304252;display:flex;gap:20px;align-items:center}header b{font-size:19px}#state{color:#84d4bd}main{display:grid;grid-template-columns:minmax(300px,38%) 1fr;gap:14px;padding:14px;height:calc(100vh - 66px)}section{background:#17222c;border:1px solid #304252;border-radius:8px;overflow:hidden}h2{font-size:15px;margin:0;padding:12px;border-bottom:1px solid #304252}#camera{display:block;width:100%;height:280px;object-fit:contain;background:#060b10}.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px}.stats div{background:#243443;padding:10px;border-radius:4px}.stats small{display:block;color:#a6bed1}.stats strong{font-size:18px}#message,#detail{padding:0 12px 12px;color:#a6bed1;line-height:1.6}.viewer{display:flex;flex-direction:column}canvas{width:100%;flex:1;min-height:240px;background:#0a1118;touch-action:none}.controls{padding:10px;border-top:1px solid #304252;display:flex;gap:8px;align-items:center;flex-wrap:wrap}button{background:#345066;color:white;border:0;border-radius:4px;padding:8px 12px;cursor:pointer}#stop{background:#744848}#note{color:#a6bed1;font-size:12px}@media(max-width:850px){main{grid-template-columns:1fr;height:auto}.viewer{height:550px}}
+</style></head><body>
+<header><b>Adaptive UAV · Live COLMAP</b><span id="state">Connecting</span></header>
+<main><section><h2>Phone API camera</h2><img id="camera" alt="Waiting for phone image"><div class="stats">
+<div><small>Captured / processed</small><strong id="frames">0 / 0</strong></div><div><small>Buffered</small><strong id="buffer">0</strong></div>
+<div><small>Keyframes / registered</small><strong id="cameras">0 / 0</strong></div><div><small>Sparse points</small><strong id="points">0</strong></div>
+<div><small>Accepted map updates</small><strong id="updates">0</strong></div><div><small>Reprojection error</small><strong id="error">—</strong></div>
+<div><small>IMU samples / received Hz</small><strong id="imu">—</strong></div><div><small>GPS accuracy</small><strong id="gps">—</strong></div>
+<div><small>Active camera</small><strong id="lens">—</strong></div><div><small>Macro mode</small><strong id="macro">—</strong></div>
+</div><div id="message"></div><div id="detail"></div></section>
+<section class="viewer"><h2>Incremental sparse map · arbitrary scale</h2><canvas id="map"></canvas><div class="controls"><button id="reset">Reset view</button><button id="stop">Stop capture and save</button><span id="note">Drag to rotate; scroll to zoom. Dense meshing is an optional final stage.</span></div></section></main>
+<script>
+const el=id=>document.getElementById(id),canvas=el('map'),ctx=canvas.getContext('2d');let points=[],path=[],center=[0,0,0],radius=1,yaw=.2,pitch=-.2,zoom=1,drag=null,revision=-1;
+function draw(){const box=canvas.getBoundingClientRect(),dpr=devicePixelRatio||1;canvas.width=box.width*dpr;canvas.height=box.height*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,box.width,box.height);const scale=Math.min(box.width,box.height)*.4*zoom/radius,cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);function project(p){let x=p[0]-center[0],y=p[1]-center[1],z=p[2]-center[2],a=cy*x+sy*z,b=-sy*x+cy*z;return[box.width/2+a*scale,box.height/2-(cp*y-sp*b)*scale]};for(const p of points){let q=project(p);ctx.fillStyle=`rgb(${p[3]},${p[4]},${p[5]})`;ctx.fillRect(q[0],q[1],2,2)}ctx.strokeStyle='#55c7e6';ctx.beginPath();path.forEach((p,i)=>{let q=project(p);i?ctx.lineTo(...q):ctx.moveTo(...q)});ctx.stroke()}
+function reset(){if(points.length){let lo=[],hi=[];for(let k=0;k<3;k++){const a=points.map(p=>p[k]).sort((a,b)=>a-b);lo.push(a[Math.floor(a.length*.02)]);hi.push(a[Math.min(a.length-1,Math.floor(a.length*.98))])}center=lo.map((v,k)=>(v+hi[k])/2);radius=Math.max(1e-4,...hi.map((v,k)=>v-lo[k]))/2}zoom=1;draw()}
+canvas.onpointerdown=e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId)};canvas.onpointerup=()=>drag=null;canvas.onpointermove=e=>{if(drag){yaw+=(e.clientX-drag[0])*.008;pitch+=(e.clientY-drag[1])*.008;drag=[e.clientX,e.clientY];draw()}};canvas.onwheel=e=>{e.preventDefault();zoom=Math.max(.05,Math.min(40,zoom*Math.exp(-e.deltaY*.001)));draw()};el('reset').onclick=reset;window.onresize=draw;
+el('stop').onclick=async()=>{el('stop').disabled=true;await fetch('/api/stop',{method:'POST'});el('state').textContent='Stopping capture; processing saved buffer'};
+async function status(){
+  try{
+    const s=window.FINAL_STATUS||await(await fetch('/api/status')).json();
+    el('state').textContent=s.state.replaceAll('_',' ');
+    el('frames').textContent=`${s.captured_frames} / ${s.processed_frames}`;
+    el('buffer').textContent=s.buffered_frames;
+    el('cameras').textContent=`${s.keyframes} / ${s.registered_cameras}`;
+    el('points').textContent=s.sparse_points.toLocaleString();
+    el('updates').textContent=s.accepted_updates;
+    el('error').textContent=s.reprojection_error_px==null?'—':s.reprojection_error_px.toFixed(2)+' px';
+    el('imu').textContent=`${s.imu_samples} / ${s.imu_rate_hz==null?'—':s.imu_rate_hz.toFixed(1)}`;
+    el('gps').textContent=s.gps?.accuracy_m==null?'—':s.gps.accuracy_m.toFixed(1)+' m';
+    const camera=s.camera||{};
+    el('lens').textContent=camera.current_name||camera.current_id||'—';
+    el('macro').textContent=camera.macro_mode==null?'—':camera.macro_mode?'On':'Off';
+    el('message').textContent=s.error||s.phone_record_error||s.message;
+    const lenses=(camera.available||[]).map(item=>`${item.id}: ${item.name}`).join(', ');
+    el('detail').textContent=`Calibration: ${s.calibration_exact?'explicit intrinsics':'approximate'}. Frame timing: ${s.frame_clock_source||'waiting'}. IMU rotation compensation: ${s.rotation_compensated?'active':'inactive'}. Last selection: ${s.last_selection_reason||'waiting'}. ${lenses?'Available cameras: '+lenses+'.':''}`;
+  }catch(e){el('state').textContent='Runner stopped or disconnected'}
+  finally{if(!window.FINAL_STATUS)setTimeout(status,1000)}
+}
+async function model(){try{const m=window.FINAL_MAP||await(await fetch('/api/map')).json();if(m.revision!==revision){const first=!points.length;points=m.points;path=m.trajectory;revision=m.revision;first?reset():draw()}}catch(e){}finally{if(!window.FINAL_MAP)setTimeout(model,2500)}}
+if(window.FINAL_STATUS){el('stop').hidden=true;el('camera').src=window.FINAL_FRAME||'';document.title='Adaptive UAV · Saved sparse map';document.querySelector('header b').textContent='Adaptive UAV · Saved sparse map';document.querySelector('section h2').textContent=window.FINAL_STATUS.source_label||'Saved camera frame'}else{setInterval(()=>{el('camera').src='/api/frame.jpg?t='+Date.now()},750)}status();model();draw();
+</script></body></html>

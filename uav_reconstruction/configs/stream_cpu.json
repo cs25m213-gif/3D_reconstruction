@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "name": "cpu_offline_colmap",
+  "device": "cpu",
+  "tracking_size": 640,
+  "tracking_fps": 2,
+  "depth_resolution": 252,
+  "depth_views": 2,
+  "mapping_queue": 3,
+  "mapping_min_seconds": 0.5,
+  "mapping_max_seconds": 2,
+  "mapping_parallax_pixels": 8,
+  "settle_tracking_frames": 0,
+  "max_active_submaps": 1,
+  "submap_frames": 8,
+  "voxel_fraction": 0.02,
+  "stereo_references": 0,
+  "stereo_seconds": 0,
+  "temporal_max_age": 1,
+  "temporal_min_coverage": 0.95,
+  "cpu_threads": 4,
+  "cpu_mapping_seconds": 90
+}

@@ -1,0 +1,3 @@
+# Additional runtime monitoring dependency. Core reconstruction environment and
+# optional CUDA DPVO dependencies are managed separately; see tools/setup_streaming.py.
+psutil==7.2.2

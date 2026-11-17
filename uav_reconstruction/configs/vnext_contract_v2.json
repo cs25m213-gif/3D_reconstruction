@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "contract_id": "vnext_contract_v2",
+  "dataset_manifest": "runs/vnext_dataset_v1/manifest.json",
+  "geometry_gate": "runs/vnext_dataset_v1/geometry_gate.json",
+  "baseline_manifest": "runs/vnext_baseline_v1/frozen_manifest.json",
+  "depth_checkpoint": "runs/depth_student_lidar_v2_augmented/best.pt",
+  "depth_architecture_id": "depth_student_48ch_24planes",
+  "depth_fallback": "da3",
+  "reference_policy": "rule",
+  "data": {
+    "cache_root": "runs/uavscenes_30_batch",
+    "sidecars": "runs/uavscenes_cached_lidar_targets",
+    "lidar_root": "runs/uavscenes_cached_lidar",
+    "scale_calibration": "runs/uavscenes_cached_lidar_targets/scale_calibration.json"
+  },
+  "protected_checkpoints": {
+    "original": {
+      "path": "runs/depth_student_20261028/best.pt",
+      "sha256": "3706cc41406a3dcc910b850ded9d86b56ee2009870d3e44a7fa8908a950130e2"
+    },
+    "v1": {
+      "path": "runs/depth_student_lidar/best.pt",
+      "sha256": "7c4a9856edf74a53097f19eb6dc32752ac71168dbaa5297971ea9d527cc7b11c"
+    },
+    "v2": {
+      "path": "runs/depth_student_lidar_v2_augmented/best.pt",
+      "sha256": "d44cead4ea7253dc269d785c480921029826667eed1b85aad5b095954ecb499e"
+    },
+    "v4": {
+      "path": "runs/depth_student_lidar_v4_more_data/best.pt",
+      "sha256": "06f7cd33411260241830250a2c58d3cd1bc3be46531f538d4c0030248bf0d240"
+    },
+    "v5": {
+      "path": "runs/depth_student_lidar_v5_matched_baseline/best.pt",
+      "sha256": "192cd79c6d9753c84473104a3f5ad8770fd81fcb8f6ea765c36f4f11c6f04112"
+    },
+    "v6": {
+      "path": "runs/depth_student_lidar_v6_sfm_anchors/best.pt",
+      "sha256": "e0adb5c168f6c2aaa966e42fb5792495e673683e18d343d0d749d990de6b39b2"
+    }
+  },
+  "expected_split_examples": {
+    "train": 683,
+    "validation": 307,
+    "test": 338
+  },
+  "geometry": {
+    "calibration_batch_suffix": "_0",
+    "validation_batch_suffix": "_1",
+    "rotation_orthonormal_tolerance": 0.001,
+    "published_constant_tolerance": 1e-06,
+    "registration_tolerance_native_px": 5.0,
+    "registration_peak_min_z": 4.0,
+    "registration_control_recovery_px": 3.0,
+    "depth_bias_tolerance_percent": 1.0,
+    "boresight_tolerance_deg": 0.1,
+    "pairing_min_ncc_margin": 0.2,
+    "tolerance_rationale": "Set before any Stage 1 result was seen. 5 native px is about 0.5 student-grid px (2448/256 = 9.6). 1 percent depth is well below the 5.35 percent DA3 control AbsRel. 0.1 deg is about 0.17 m at 100 m range."
+  },
+  "memory": {
+    "active_keyframes": 64,
+    "recent_candidates": 4,
+    "historical_candidates": 12,
+    "verified_pair_budget": 16,
+    "policy_tokens": 16
+  },
+  "utility": {
+    "fidelities": [
+      "F_DEPTH",
+      "P_LOCAL",
+      "R_ROLLOUT"
+    ],
+    "pilot_decisions": 48,
+    "rollout_horizon_seconds": [
+      5,
+      15
+    ],
+    "quality_protocol": "reference_roi_v1",
+    "scalarization": "train_calibrated_v1_uncalibrated_defaults",
+    "tolerance_m": 1.0,
+    "voxel_m": 0.5,
+    "prefix_keyframes": [
+      6,
+      12
+    ],
+    "keyframe_stride": 4,
+    "candidate_offsets": [
+      1,
+      4,
+      8,
+      16
+    ],
+    "budgets": {
+      "tight": {
+        "seconds": 20.0,
+        "depth_calls": 2,
+        "matches": 16
+      },
+      "loose": {
+        "seconds": 120.0,
+        "depth_calls": 16,
+        "matches": 64
+      }
+    },
+    "rollout_frames": 20,
+    "registration_min_inliers": 30,
+    "tie_margin": 0.002
+  },
+  "selector": {
+    "architecture_id": "memory_utility_v1",
+    "hidden_dim": 128,
+    "heads": 4,
+    "layers": 2,
+    "seed": 42,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "gradient_clip": 1.0,
+    "epochs": 30,
+    "patience": 5,
+    "batch_size": 8
+  },
+  "execution": {
+    "device": "cpu",
+    "cpu_workers": 4,
+    "resume": false,
+    "allow_unresolved_reference": false
+  },
+  "unresolved": [],
+  "evaluation": {
+    "keyframes_per_clip": 12,
+    "promotion_margin_f": 0.005,
+    "split": "validation"
+  }
+}
