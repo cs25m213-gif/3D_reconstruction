@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "bounds": {
+    "min": [
+      -37.602386474609375,
+      -6.125014305114746,
+      -6.532895088195801
+    ],
+    "max": [
+      6.208069801330566,
+      3.8534131050109863,
+      45.14375305175781
+    ]
+  },
+  "texture": {
+    "url": "texture-77def114f878.jpg",
+    "bytes": 7933739
+  },
+  "previewTexture": {
+    "url": "preview-d53455e37585.jpg",
+    "bytes": 402750
+  },
+  "parts": [
+    {
+      "url": "part-00-7f8bf8852cbe.glb.gzdata",
+      "bytes": 924928,
+      "triangles": 42684,
+      "vertices": 47666
+    },
+    {
+      "url": "part-01-64a32c8aaf41.glb.gzdata",
+      "bytes": 1003430,
+      "triangles": 42684,
+      "vertices": 52996
+    },
+    {
+      "url": "part-02-c7c12080b12b.glb.gzdata",
+      "bytes": 1216773,
+      "triangles": 42685,
+      "vertices": 70604
+    },
+    {
+      "url": "part-03-fff0e2b12c6b.glb.gzdata",
+      "bytes": 1114312,
+      "triangles": 42684,
+      "vertices": 64171
+    },
+    {
+      "url": "part-04-d313c081cf9b.glb.gzdata",
+      "bytes": 977658,
+      "triangles": 42685,
+      "vertices": 51155
+    },
+    {
+      "url": "part-05-43c0982ee985.glb.gzdata",
+      "bytes": 915877,
+      "triangles": 42684,
+      "vertices": 45947
+    },
+    {
+      "url": "part-06-d5ffe7853ebf.glb.gzdata",
+      "bytes": 900070,
+      "triangles": 42684,
+      "vertices": 43866
+    },
+    {
+      "url": "part-07-ac407fe8af89.glb.gzdata",
+      "bytes": 1170733,
+      "triangles": 42685,
+      "vertices": 69282
+    },
+    {
+      "url": "part-08-8c5fe55a4a74.glb.gzdata",
+      "bytes": 933465,
+      "triangles": 42685,
+      "vertices": 47306
+    },
+    {
+      "url": "part-09-ece67082f16b.glb.gzdata",
+      "bytes": 1273782,
+      "triangles": 42684,
+      "vertices": 76452
+    },
+    {
+      "url": "part-10-f6652e5ccb92.glb.gzdata",
+      "bytes": 1036361,
+      "triangles": 42684,
+      "vertices": 54210
+    },
+    {
+      "url": "part-11-f488dc688867.glb.gzdata",
+      "bytes": 1032783,
+      "triangles": 42684,
+      "vertices": 58392
+    },
+    {
+      "url": "part-12-7e5768471d8c.glb.gzdata",
+      "bytes": 926147,
+      "triangles": 42685,
+      "vertices": 46157
+    },
+    {
+      "url": "part-13-3e6628580e35.glb.gzdata",
+      "bytes": 1219668,
+      "triangles": 42685,
+      "vertices": 65564
+    },
+    {
+      "url": "part-14-da2a6e621a22.glb.gzdata",
+      "bytes": 1009057,
+      "triangles": 42684,
+      "vertices": 57239
+    },
+    {
+      "url": "part-15-bf262ef82c8c.glb.gzdata",
+      "bytes": 979756,
+      "triangles": 42684,
+      "vertices": 50054
+    }
+  ],
+  "triangles": 682950,
+  "totalBytes": 24971289,
+  "sourceSha256": "d3cdba0b8ae3767ee2d66ac6e362d59a95f79538a04c4508dba96cfc29187395",
+  "geometryVerifiedExact": true
+}

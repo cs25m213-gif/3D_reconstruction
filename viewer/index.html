@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reconstruction Compare</title>
+<style>
+:root{--bg:#0f1316;--panel:#171d21;--line:#2a333a;--text:#e3e9ec;--muted:#93a1aa;--accent:#5cc8b4;--warn:#e0b45c;--bad:#e07a6c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;padding:12px 16px;border-bottom:1px solid var(--line)}
+header h1{font-size:17px;margin:0;font-weight:600}
+header span{color:var(--muted);font-size:13px}
+main{display:grid;grid-template-columns:minmax(300px,440px) 1fr;gap:12px;padding:12px 16px}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+main>*{min-width:0}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px;min-width:0}
+h2{font-size:13px;font-weight:600;margin:0 0 8px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+select,button,input{font:inherit;color:var(--text);background:#0f1418;border:1px solid var(--line);border-radius:6px;padding:5px 8px}
+button{cursor:pointer}button:hover{border-color:var(--accent)}
+video{width:100%;border-radius:6px;background:#000;margin-top:8px;display:block}
+.views{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:700px){.views{grid-template-columns:1fr}}
+.pane{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pane .bar{display:flex;gap:6px;align-items:center}
+.pane select{flex:1;min-width:0}
+.stage{position:relative;height:min(62vh,640px);min-height:300px;border-radius:6px;overflow:hidden;background:#0a0d0f;border:1px solid var(--line)}
+.stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.msg{position:absolute;inset:auto 8px 8px 8px;font-size:12px;color:var(--muted);pointer-events:none}
+.info{font-size:12.5px;color:var(--muted);min-height:3.2em}
+.info b{color:var(--text);font-weight:600}
+.tools{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:10px;font-size:13px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;font-variant-numeric:tabular-nums}
+th,td{text-align:right;padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+.ok{color:var(--accent)}.pending{color:var(--warn)}
+.note{font-size:12px;color:var(--muted);margin-top:8px}
+</style></head>
+<body>
+<header><h1>Reconstruction compare · REC_0001</h1><span>Both views share one camera. Drag to orbit, right-drag to pan, scroll to zoom.</span></header>
+<main>
+<div>
+<section>
+<h2>Video · de-jello v3 (reconstruction input)</h2>
+<select id="video"></select>
+<video id="player" controls muted loop playsinline preload="auto"></video>
+</section>
+<section style="margin-top:12px" id="runsbox">
+<h2>Runs on this video</h2>
+<div class="note" style="margin-top:0">All runs use the de-jello video and the same recovered cameras.</div>
+<ul id="runs" style="margin:6px 0 0;padding-left:18px;font-size:13px"></ul>
+<button id="refresh" style="margin-top:8px">Refresh list</button>
+</section>
+<section style="margin-top:12px" id="speedbox" hidden>
+<h2>Speed test vs native 4K</h2>
+<div class="tablewrap"><table id="speed"><thead><tr><th>Setting</th><th>Time</th><th>Points</th><th>Acc.</th><th>Cov.</th></tr></thead><tbody></tbody></table></div>
+<div class="note" id="speednote">Time is depth estimation + fusion. Acc. (accuracy) and Cov. (coverage) are within 0.05 scene units of the native-4K fused cloud. Times share the GPU with another job.</div>
+</section>
+</div>
+<section>
+<h2>Reconstructions</h2>
+<div class="views">
+<div class="pane"><div class="bar"><select id="selA"></select></div><div class="stage" id="stA"><div class="msg"></div></div><div class="info" id="infoA"></div></div>
+<div class="pane"><div class="bar"><select id="selB"></select></div><div class="stage" id="stB"><div class="msg"></div></div><div class="info" id="infoB"></div></div>
+</div>
+<div class="tools">
+<button id="home">Reset view</button>
+<label>Point size <input id="psize" type="range" min="0.5" max="5" step="0.5" value="1.5"></label>
+<label><input id="sync" type="checkbox" checked> Sync cameras</label>
+</div>
+</section>
+</main>
+<script type="importmap">{"imports":{"three":"./deps/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {PLYLoader} from './deps/PLYLoader.js';
+import {GLTFLoader} from './deps/GLTFLoader.js';
+import {OrbitControls} from './deps/OrbitControls.js';
+
+const $=id=>document.getElementById(id);
+const fmt=n=>n==null?'–':n>=1e6?(n/1e6).toFixed(2)+'M':n>=1e3?(n/1e3).toFixed(0)+'k':String(n);
+const mins=s=>s==null?'–':s<90?s.toFixed(0)+' s':(s/60).toFixed(1)+' min';
+let models=[],avail={},speed={},comparison=null;
+
+async function exists(url){try{const r=await fetch(url,{method:'HEAD',cache:'no-store'});return r.ok}catch{return false}}
+async function json(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():null}catch{return null}}
+
+// ---------- video ----------
+async function setupVideo(){
+  const vids=await json('videos.json')||[];const sel=$('video');
+  sel.innerHTML=vids.map((v,i)=>`<option value="${i}">${v.label}</option>`).join('');
+  const play=()=>{const v=vids[+sel.value];if(!v)return;const p=$('player');const t=p.currentTime||0;p.src=v.url;p.currentTime=t;p.play().catch(()=>{})};
+  sel.hidden=vids.length<2;sel.onchange=play;play();
+}
+
+// ---------- 3D ----------
+const camera=new THREE.PerspectiveCamera(52,1,0.01,5000);
+let home=null;
+const panes=['A','B'].map(k=>{
+  const st=$('st'+k),renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;
+  st.prepend(renderer.domElement);
+  const scene=new THREE.Scene();scene.background=new THREE.Color(0x0a0d0f);
+  const cam=camera.clone();
+  const controls=new OrbitControls(cam,renderer.domElement);controls.enableDamping=false;controls.screenSpacePanning=true;
+  return {k,st,renderer,scene,cam,controls,object:null,msg:st.querySelector('.msg'),info:$('info'+k),sel:$('sel'+k),token:0};
+});
+function size(){for(const p of panes){const w=p.st.clientWidth,h=p.st.clientHeight;p.renderer.setSize(w,h,false);p.cam.aspect=w/h;p.cam.updateProjectionMatrix()}render()}
+function render(){for(const p of panes)p.renderer.render(p.scene,p.cam)}
+for(const p of panes){
+  p.controls.addEventListener('change',()=>{
+    if($('sync').checked)for(const q of panes)if(q!==p){q.cam.position.copy(p.cam.position);q.cam.quaternion.copy(p.cam.quaternion);q.cam.up.copy(p.cam.up);q.controls.target.copy(p.controls.target);q.cam.updateMatrixWorld()}
+    render()});
+}
+new ResizeObserver(size).observe(document.querySelector('.views'));
+
+function applyHome(){
+  if(!home)return;
+  for(const p of panes){p.cam.position.copy(home.pos);p.cam.up.copy(home.up);p.controls.target.copy(home.target);p.cam.lookAt(home.target);p.cam.fov=home.fov;p.cam.updateProjectionMatrix();p.controls.update()}
+  render();
+}
+function homeFromObject(obj){
+  const box=new THREE.Box3().setFromObject(obj),c=box.getCenter(new THREE.Vector3()),r=box.getSize(new THREE.Vector3()).length()/2;
+  home={pos:c.clone().add(new THREE.Vector3(0,-r*.6,-r*1.2)),up:new THREE.Vector3(0,-1,0),target:c,fov:52};
+}
+
+const cache=new Map();
+function load(m){
+  if(cache.has(m.url))return cache.get(m.url);
+  const pr=(async()=>{
+    if(m.kind==='glb'){
+      const s=(await new GLTFLoader().loadAsync(m.url)).scene;
+      s.traverse(o=>{if(o.isMesh){const old=o.material;o.material=new THREE.MeshBasicMaterial({map:old.map||null,color:old.map?0xffffff:(old.color||0xb9c8ce),side:THREE.DoubleSide,vertexColors:!old.map&&!!o.geometry.attributes.color})}});
+      return {object:s,stats:{faces:countFaces(s)}};
+    }
+    const g=await new PLYLoader().loadAsync(m.url);
+    const color=g.hasAttribute('color');
+    if(m.kind==='points'){
+      const mat=new THREE.PointsMaterial({size:+$('psize').value,sizeAttenuation:false,vertexColors:color,color:color?0xffffff:0xb9c8ce});
+      return {object:new THREE.Points(g,mat),stats:{points:g.attributes.position.count}};
+    }
+    return {object:new THREE.Mesh(g,new THREE.MeshBasicMaterial({vertexColors:color,color:color?0xffffff:0xb9c8ce,side:THREE.DoubleSide})),stats:{faces:g.index?g.index.count/3:g.attributes.position.count/3}};
+  })();
+  cache.set(m.url,pr);pr.catch(()=>cache.delete(m.url));return pr;
+}
+function countFaces(o){let n=0;o.traverse(x=>{if(x.isMesh){const g=x.geometry;n+=g.index?g.index.count/3:g.attributes.position.count/3}});return n}
+
+async function show(p,id){
+  const m=models.find(x=>x.id===id);if(!m)return;const token=++p.token;
+  if(p.object){p.scene.remove(p.object);p.object=null}
+  p.info.innerHTML=describe(m,null);p.msg.textContent='Loading '+m.label+' …';render();
+  try{
+    const {object,stats}=await load(m);if(token!==p.token)return;
+    p.object=object.clone();p.scene.add(p.object);p.msg.textContent='';
+    if(!home){homeFromObject(p.object);applyHome()}
+    p.info.innerHTML=describe(m,stats);render();
+  }catch(e){if(token===p.token)p.msg.textContent='Could not load: '+e.message}
+}
+function describe(m,stats){
+  const r=speed[m.speed]||null,c=comparison&&comparison.rows.find(x=>x.name===m.speed);
+  const parts=[`<b>${m.label}</b>`];
+  if(m.note)parts.push(m.note);
+  if(stats)parts.push(stats.points?fmt(stats.points)+' points':fmt(stats.faces)+' faces');
+  if(m.seconds)parts.push('depth+fusion '+mins(m.seconds));
+  if(r)parts.push('depth+fusion '+mins(r.total_seconds));
+  if(c&&c['tau0.05'])parts.push(`accuracy ${(100*c['tau0.05'].accuracy).toFixed(0)}% · coverage ${(100*c['tau0.05'].completeness).toFixed(0)}%`);
+  return parts.join(' · ');
+}
+
+async function refresh(){
+  models=await json('models.json')||[];
+  comparison=await json('speed/comparison.json');
+  await Promise.all(models.map(async m=>{
+    avail[m.id]=await exists(m.url);
+    if(m.speed){const r=await json(`speed/${m.speed}/result.json`);if(r)speed[m.speed]=r}
+  }));
+  for(const p of panes){
+    const cur=p.sel.value;
+    p.sel.innerHTML=models.map(m=>`<option value="${m.id}" ${avail[m.id]?'':'disabled'}>${m.label}${avail[m.id]?'':' (not ready yet)'}</option>`).join('');
+    const first=ids=>ids.find(i=>avail[i]);
+    const prefA=['web_textured','web_points','web_lowres'],prefB=['hybrid_web','trained_selector17','student84','web_lowres','web_points'];
+    const want=cur&&avail[cur]?cur:first(p.k==='A'?prefA:prefB.filter(i=>i!==panes[0].sel.value));
+    if(want){p.sel.value=want;if(want!==cur)show(p,want)}
+  }
+  $('speedbox').hidden=!models.some(m=>m.speed);
+  $('runs').innerHTML=models.filter(m=>!m.id.startsWith('full_')).map(m=>`<li><span class="${avail[m.id]?'ok':'pending'}">${avail[m.id]?'ready':'running'}</span> · ${m.label}${m.note?` <span style="color:var(--muted)">— ${m.note}</span>`:''}</li>`).join('');
+  const tb=$('speed').querySelector('tbody');
+  tb.innerHTML=models.filter(m=>m.speed||m.reference).map(m=>{
+    const r=speed[m.speed],c=comparison&&comparison.rows.find(x=>x.name===m.speed),t=c&&c['tau0.05'];
+    const time=m.reference?mins(m.seconds):r?mins(r.total_seconds):'<span class="pending">running</span>';
+    return `<tr><td>${m.short||m.label}</td><td>${time}</td><td>${m.reference?fmt(m.points):c?fmt(c.points):'–'}</td><td>${m.reference?'ref':t?(100*t.accuracy).toFixed(0)+'%':'–'}</td><td>${m.reference?'ref':t?(100*t.completeness).toFixed(0)+'%':'–'}</td></tr>`}).join('');
+}
+
+for(const p of panes)p.sel.onchange=()=>show(p,p.sel.value);
+$('home').onclick=applyHome;$('refresh').onclick=refresh;
+$('psize').oninput=()=>{for(const p of panes)if(p.object&&p.object.isPoints){p.object.material.size=+$('psize').value}render()};
+
+const pv=(await json('inventory.json')||[])[0]?.preview;
+if(pv){const pos=new THREE.Vector3(...pv.position),fwd=new THREE.Vector3(...pv.forward);
+  home={pos,up:new THREE.Vector3(...pv.up),target:pos.clone().add(fwd.multiplyScalar(6)),fov:pv.fov_y||52}}
+size();applyHome();
+setupVideo();refresh();
+</script>
+</body></html>

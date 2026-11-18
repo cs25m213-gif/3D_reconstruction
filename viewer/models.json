@@ -1,0 +1,10 @@
+[
+ {"id":"web_textured","label":"Native 4K · textured (reference, web copy)","url":"light/ref4k_textured.glb","kind":"glb","note":"84 frames, PatchMatch at 3840 px; ≈90 min to the textured model"},
+ {"id":"hybrid_web","label":"COMBINED · rule + trained selector, 2560-px depth (F 0.980)","url":"light/hybrid_textured.glb","kind":"glb","note":"92 frames; 120 min on a shared GPU"},
+ {"id":"hybrid_fast","label":"COMBINED FAST · 1920-px depth (F 0.978)","url":"light/hybrid_fast_textured.glb","kind":"glb","note":"same 92 frames, lighter stereo; 53 min on a shared GPU"},
+ {"id":"trained_selector17","label":"Trained selector · 17 frames + our depth network","url":"light/selected17_mesh.ply","kind":"mesh","note":"8.3 min; 97% of the reference surface recovered"},
+ {"id":"control_dino17","label":"Control · DINO-middle rule, 17 frames + our depth network","url":"light/dino_middle17_mesh.ply","kind":"mesh","note":"same frame count, rule-based frames"},
+ {"id":"student84","label":"Our depth network · 84 parallax frames","url":"light/student84_mesh.ply","kind":"mesh","note":"14.4 min"},
+ {"id":"web_lowres","label":"DA3 depth · 84 parallax frames (F 0.953)","url":"light/lowres_mesh.ply","kind":"mesh","note":"8.6 min"},
+ {"id":"web_points","label":"Native 4K · fused points (reference, 1.5M sample)","url":"light/ref4k_points.ply","kind":"points"}
+]

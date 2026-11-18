@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GeoStreamFusion</title>
+<style>
+:root{--ink:#202121;--muted:#697171;--paper:#f9f8f4;--wine:#800000;--line:#deded6;--teal:#257e6d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 "Segoe UI",Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:48px max(16px,env(safe-area-inset-left,0px)) 64px}
+.eyebrow{font-size:11px;font-weight:750;letter-spacing:1.9px;color:var(--wine);text-transform:uppercase}
+h1{font-size:clamp(36px,6vw,60px);font-weight:650;letter-spacing:-.06em;line-height:1.02;margin:14px 0 18px}
+h1 em{font-style:normal;color:var(--wine)}
+.lead{color:var(--muted);max-width:62ch;margin:0 0 36px;font-size:18px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;margin-bottom:40px}
+.stats b{display:block;font-size:32px;font-weight:600;letter-spacing:-1px}
+.stats span{font-size:13px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+a.card{display:grid;gap:8px;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--line);border-radius:6px;padding:22px}
+a.card:hover{border-color:var(--wine)}
+a.card:focus-visible{outline:2px solid var(--wine);outline-offset:3px}
+.card .n{font-size:11px;font-weight:750;letter-spacing:1.6px;color:var(--wine)}
+.card h2{margin:0;font-size:21px;font-weight:600;letter-spacing:-.4px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card .go{font-size:13px;font-weight:650;margin-top:4px}
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+footer strong{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">IIT Tirupati · M.Tech Project · 2026</span>
+  <h1>Every frame has a cost.<br><em>Learn its value.</em></h1>
+  <p class="lead">GeoStreamFusion turns a drone video into a textured 3D model. A learned selector keeps the frames that improve the reconstruction, a depth network estimates their depth, and masked multi-view fusion builds the surface.</p>
+  <div class="stats">
+    <div><b>8.6 min</b><span>our pipeline, F 0.95 vs the 4K reference</span></div>
+    <div><b>≈90 min</b><span>native-4K multi-view stereo, textured</span></div>
+    <div><b>0.978</b><span>F-score of the combined fast run (53 min)</span></div>
+    <div><b>149,637</b><span>training images from nine dataset families</span></div>
+  </div>
+  <div class="cards">
+    <a class="card" href="architecture/"><span class="n">01 / THE SYSTEM</span><h2>Architecture walkthrough</h2><p>An animated, step-by-step tour from the 4K video to the textured model, using real data from the campus run.</p><span class="go">Play architecture →</span></a>
+    <a class="card" href="viewer/"><span class="n">02 / THE OUTPUT</span><h2>3D reconstruction viewer</h2><p>Compare our reconstructions with the native-4K reference side by side, with a shared camera and the input video.</p><span class="go">Open the viewer →</span></a>
+    <a class="card" href="poster/poster_GeoStreamFusion.pdf"><span class="n">03 / THE POSTER</span><h2>A1 project poster</h2><p>Method, selector training, measured results and positioning, on one page.</p><span class="go">Open the PDF →</span></a>
+  </div>
+  <footer><strong>GeoStreamFusion</strong> · M.Tech Project, Computer Science and Engineering, IIT Tirupati<br>Venkatasai Eswar Nandu · Atul Tripathi · M Rajvardhan · Atri Sukul (CS25M206) · Supervisor: Dr. Chalavadi Vishnu<br>All timings were measured on one GPU shared with another training job.</footer>
+</div>
+</body>
+</html>

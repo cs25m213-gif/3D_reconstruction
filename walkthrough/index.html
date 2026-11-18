@@ -1,0 +1,286 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>
+.architecture-legend{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 18px;font-size:12px;font-weight:650}
+.architecture-legend span{padding:5px 10px;border-left:5px solid var(--role);background:var(--tint)}
+.role-pose,[data-role="pose"]{--role:#225b9b;--tint:#eaf2fc}
+.role-selector,[data-role="selector"]{--role:#800000;--tint:#f9eaea}
+.role-depth,[data-role="depth"]{--role:#97500c;--tint:#fff2dd}
+.role-fusion,[data-role="fusion"]{--role:#176c58;--tint:#e5f5ef}
+.role-export,[data-role="export"]{--role:#674195;--tint:#f2ecfb}
+.stage[data-role]{background:var(--tint);border-top:5px solid var(--role);color:var(--role)}
+.stage[data-role] small{color:#3c4347}.stage[data-role].active{box-shadow:inset 0 0 0 2px var(--role);background:var(--tint);color:var(--role)}
+.action-equations{display:grid;gap:12px;margin:16px 0}.action-equations>div{border-left:3px solid #800000;padding:8px 12px;background:#f9eeee;min-width:0}
+.action-equations b{font-size:13px;display:block}.action-equations code{display:block;font-size:clamp(10px,1.4vw,15px);white-space:normal;overflow-wrap:anywhere}
+.walkthrough-panel{margin-top:36px;padding-top:24px;border-top:1px solid var(--line)}.walkthrough-panel h3{font-size:25px}.walkthrough-panel .button{margin:16px 0}.walkthrough-frame{width:100%;height:790px;border:1px solid var(--line);border-radius:6px;background:var(--paper)}
+@media(max-width:600px){.walkthrough-frame{height:720px}}
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>
+/* Match utility equations to selector blocks 2–3 and the evaluation note to fusion block 5. */
+.action-equations,.action-equations code,.selector-equation-key{color:#800000}.selector-equation-key{font-size:13px;font-weight:650}.fusion-equation-key{color:#176c58}
+</style></head><body>
+<meta charset="utf-8">
+<title>GeoStreamFusion Walkthrough</title>
+<script>if(new URLSearchParams(location.search).has('embed'))document.documentElement.classList.add('embedded');</script>
+<style>
+html.embedded{overflow:hidden}
+html.embedded body{padding:16px}
+.embedded .wrap>.top,.embedded .wrap>h2,.embedded .wrap>.intro,.embedded .training{display:none}
+.embedded .wrap{gap:14px}
+.embedded .architecture-legend{margin:0}
+</style>
+<style>
+/* Layout: matches the GeoStreamFusion project site: paper ground, wine accent, teal for geometry,
+   six stage chips above a single animated stage, then the stage description and the training signal. */
+:root{ --ink:#202121; --muted:#697171; --paper:#f9f8f4; --card:#ffffff; --wine:#800000; --line:#deded6; --teal:#257e6d; --cut:#c25a2c;
+  --f:"Segoe UI",Arial,sans-serif; --mono:Consolas,"SFMono-Regular",Menlo,monospace; color-scheme:light }
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--f);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 56px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:22px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.eyebrow{font-size:11px;font-weight:750;letter-spacing:1.9px;color:var(--wine);text-transform:uppercase}
+.tag{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+h2{font-size:clamp(28px,4vw,41px);font-weight:550;letter-spacing:-1.8px;line-height:1.08;margin:0;text-wrap:balance}
+h2 em{font-style:normal;color:var(--wine)}
+.intro{color:var(--muted);max-width:66ch;margin:0}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.button{font:650 13px var(--f);color:var(--ink);background:transparent;border:1px solid var(--ink);border-radius:999px;padding:9px 16px;cursor:pointer}
+.button.primary{background:var(--ink);color:var(--paper)}
+.button:hover{border-color:var(--wine);color:var(--wine)}.button.primary:hover{background:var(--wine);color:#fff;border-color:var(--wine)}
+.button:focus-visible,.stage:focus-visible{outline:2px solid var(--wine);outline-offset:3px}
+.controls .note{font-size:13px;color:var(--muted)}
+.controls .time{margin-left:auto;font:13px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+@media (max-width:820px){.flow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:480px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stage{all:unset;cursor:pointer;display:grid;gap:3px;padding:10px 2px 4px;border-top:2px solid var(--line);position:relative;min-width:0}
+.stage i{position:absolute;left:0;top:-2px;height:2px;width:0;background:var(--wine)}
+.stage b{font-size:11px;font-weight:750;letter-spacing:1.4px;color:var(--muted)}
+.stage strong{font-size:15px;font-weight:600;line-height:1.25}
+.stage small{font-size:12px;color:var(--muted)}
+.stage.active b{color:var(--wine)}
+.screen{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+canvas{display:block;width:100%;aspect-ratio:16/9;max-width:100%}
+.desc{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,300px);gap:22px;align-items:start;padding-top:4px}
+@media (max-width:820px){.desc{grid-template-columns:auto minmax(0,1fr)}.desc .kv{grid-column:1/-1}}
+.desc .num{font-size:44px;font-weight:300;color:var(--wine);letter-spacing:-2px;line-height:1}
+.desc h3{font-size:21px;font-weight:600;letter-spacing:-.4px;margin:0 0 4px}
+.desc p{margin:0;color:var(--ink)}
+.desc .sub{font-size:12px;color:var(--muted);margin-bottom:6px}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-left:8px;vertical-align:2px}
+.pill.real{color:var(--teal);background:rgba(37,126,109,.1)}.pill.sk{color:var(--muted);background:#efeee8}
+.kv{display:grid;gap:7px;border-left:1px solid var(--line);padding-left:18px;min-width:0}
+.kv div{display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.kv span{color:var(--muted)}.kv b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:820px){.kv{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:12px}}
+.training{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;border-top:1px solid var(--line);padding-top:24px}
+@media (max-width:820px){.training{grid-template-columns:minmax(0,1fr)}}
+.equation{font:26px var(--mono);margin:8px 0 10px;color:var(--ink);overflow-x:auto}
+.training h3{font-size:18px;font-weight:600;margin:0 0 8px}
+.training ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.small{font-size:13px;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+</style>
+
+<div class="wrap">
+  <div class="top"><span class="eyebrow">SIH problem · 01 / The system</span><span class="tag">Animated walkthrough · campus run, REC_0001</span></div>
+  <h2>A frame is useful when<br><em>it improves the reconstruction.</em></h2>
+  <p class="intro">Follow one drone video through the six stages. Steps marked real use data from our run on the campus flight; the 3D sketches are schematic.</p>
+  <div class="architecture-legend" aria-label="Architecture colour legend"><span class="role-pose">Camera geometry</span><span class="role-selector">Learned selector</span><span class="role-depth">Depth estimation</span><span class="role-fusion">Surface fusion</span><span class="role-export">Mesh output</span></div><div class="controls">
+    <button class="button primary" id="play" type="button">Pause</button>
+    <button class="button" id="prev" type="button" aria-label="Previous step">← Prev</button>
+    <button class="button" id="next" type="button" aria-label="Next step">Next →</button>
+    <button class="button" id="restart" type="button">Restart</button>
+    <span class="time" id="time">0:00 / 0:00</span>
+  </div>
+  <div class="flow" id="flow" aria-label="Architecture stages"></div>
+  <div class="screen"><canvas id="cv" width="1600" height="900" aria-label="Animated architecture stage"></canvas></div>
+  <div class="desc" aria-live="polite">
+    <span class="num" id="num">01</span>
+    <div><div class="sub" id="sub">Step 1 of 10</div><h3><span id="title">The input</span><span class="pill real" id="pill">Real data</span></h3><p id="body"></p></div>
+    <div class="kv" id="kv"></div>
+  </div>
+  <div class="legend"><span><i style="background:var(--teal)"></i>geometry and cameras</span><span><i style="background:var(--wine)"></i>learned decisions</span><span><i style="background:var(--cut)"></i>removed</span></div>
+  <div class="training">
+    <div><span class="eyebrow">Training signal</span>
+      <p class="selector-equation-key">Maroon equations supervise the frame-utility and action blocks (2–3).</p><div class="action-equations"><div><b>ADD candidate c</b><code>g_ADD(c | S) = F(S ∪ {c}) − F(S)</code></div><div><b>SWAP occupant o for c</b><code>g_SWAP(c, o | S) = F((S ∖ {o}) ∪ {c}) − F(S)</code></div><div><b>KEEP the current set</b><code>g_KEEP(S) = 0</code></div></div>
+      <p>Measure the surface-score change after adding a candidate or replacing an occupant, reconstructing both alternatives with the same depth model.</p>
+      <p class="small">S: retained frame set; c: candidate; o: replaced occupant. <span class="fusion-equation-key">F: surface F-score from fusion/checks (block 5).</span> Gains use the same depth version and reference.</p></div>
+    <div><h3>What the selector is</h3><ul>
+      <li><strong>Image encoder:</strong> ResNet18 → 384-d embedding, with an auxiliary image-degradation head.</li>
+      <li><strong>Context:</strong> three tokens (map state, candidate, occupant) through a four-layer Transformer, width 256, 8 heads.</li>
+      <li><strong>Decision:</strong> ADD head for an empty view bin, SWAP head for an occupied one; DINO similarity (cos ≥ 0.9) defines the bins.</li>
+      <li><strong>Robustness:</strong> trained with motion blur, defocus, mixed degradation and frame gaps.</li></ul></div>
+  </div>
+  <p class="small">Keyboard: Space plays or pauses, arrow keys change step. All timings were measured on one GPU shared with another training job.</p>
+</div>
+
+<script>
+const DATA = {"cand":[0,2,4,6,8,10,12,14,16,17,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,83,84,86,88,90,92,94,95,96,98,100,102,104,106,107,108,110,112,114,116,118,120,122,124,126,128,130,132,134,136,137,138,140,142,144,146,148,150,152,153,154,156,158,160,162,164,166,168,170,172,174,176,178,180,182,184,186,188,190,192,194,196,198,200,202,204,206,208,210,212,214,216,218,220,222,224,226,227,228,230,232,234,236,237,238,240,242,244,246,248,250,252,254,256,258,260,262,264,266,268,270,272,274,276,278,280,282,284,286,288,290,292,294,296,298,300,302,304,306,307,308,310,312,314,316,318,320,322,324,326,328,330,332,334,336,338,340,341,342,344,346,348,350,352,354,356,358,360,362,364,366,368,370,372,374,376,378,380,382,383,384,386,388,390,392,394,396,398,400,402,404,406,408,410,412,414,416,418,420,422,424,426,428,430,432,434,436,437,438,440,442,444,446,447,448,450,452,454,456,458,460,462,464,466,468,470,472,474,476,477,478,480,482,484,485,486,488,490,492,494,496,498,500,501,502,504,506,507,508,510,512,514,515,516,518,520,522,524,526,527,528,530,532,534,536,538,540,542,544,546,547,548,550,552,554,556,558,560,562,564,565,566,568,570,572,574,576,578,580,582,584,585,586,588,590,592,594,596,598,600,602,604,606,608,610,612,613,614,616,618,620,621,622,624,626,628,630,632,634,636,637,638,640,642,644,645,646,648,650,651,652,654,656,658,660,662,664,666,668,670,672,673,674,676,678,680,682,684,686,688,690,692,694,695,696,698,700,702,704,705,706,708,710,712,714,715,716,718,720,722,724,726,727,728,730,732,734,736,737,738,740,742,744,746,748,750,751,752,754,756,758,759,760,762,764,766,768,770,772,774,776,778,780,782,784,786,788,790,791,792,794,796,798,800,802,803,804,806,808,810,812,814,815,816,818,820],"score":[0.632,0.114,-0.145,0.016,-0.202,-0.017,0.138,0.028,0.031,0.061,0.038,0.225,-0.058,-0.04,0.168,-0.003,0.102,-0.111,0.146,-0.104,0.02,0.272,0.031,0.055,0.272,0.116,-0.156,0.235,-0.199,0.052,0.025,0.076,-0.077,0.136,-0.03,0.729,0.217,0.088,-0.031,0.009,-0.116,0.017,-0.041,-0.004,-0.053,0.083,0.004,0.032,0.101,-0.202,-0.09,0.074,0.085,0.234,-0.077,0.076,0.146,0.066,-0.081,-0.011,0.025,0.067,-0.074,-0.09,-0.079,-0.067,0.106,-0.217,0.18,0.192,0.477,-0.119,0.216,-0.268,0.165,-0.217,-0.074,-0.044,-0.11,-0.158,-0.25,-0.026,-0.109,-0.209,0.113,-0.067,0.161,-0.177,0.156,-0.028,-0.173,0.021,-0.023,-0.224,-0.086,-0.059,0.011,-0.111,-0.102,-0.469,-0.087,-0.263,0.152,-0.187,-0.078,0.282,0.034,-0.159,-0.003,-0.151,-0.229,-0.346,-0.141,0.256,0.05,0.087,0.1,-0.077,0.19,0.155,-0.314,-0.062,-0.23,-0.261,-0.242,-0.279,-0.085,0.098,0.076,0.056,-0.109,0.011,-0.227,-0.207,-0.131,-0.022,0.004,-0.303,-0.221,-0.168,0.181,0.275,0.097,-0.1,-0.017,-0.335,-0.164,-0.238,-0.397,0.072,-0.347,-0.014,-0.03,-0.104,0.139,-0.288,0.185,0.098,0.177,-0.141,-0.318,-0.117,-0.314,-0.313,0.003,0.174,0.187,-0.295,-0.106,-0.276,-0.295,0.015,-0.423,-0.219,-0.213,0.308,-0.325,0.088,-0.098,0.141,-0.036,-0.167,-0.292,-0.051,-0.004,-0.249,-0.248,-0.071,0.092,-0.1,-0.095,-0.172,0.002,-0.1,-0.255,-0.064,-0.248,-0.408,-0.033,-0.315,-0.108,-0.232,-0.2,-0.179,-0.249,0.174,-0.326,0.078,0.221,-0.271,0.374,0.234,-0.17,0.081,0.091,0.017,-0.194,0.179,-0.228,0.18,-0.347,-0.124,0.022,0.326,-0.015,-0.106,0.011,0.361,-0.1,-0.242,0.262,-0.068,-0.189,0.12,0.175,-0.211,-0.232,-0.164,-0.203,-0.303,0.099,-0.285,-0.214,-0.2,-0.269,0.482,0.243,-0.113,0.184,-0.107,-0.157,0.205,-0.295,-0.246,-0.108,0.16,-0.149,-0.11,-0.094,-0.422,-0.241,-0.105,0.206,-0.205,-0.271,-0.218,-0.059,-0.017,0.061,-0.142,-0.145,0.243,0.05,0.06,0.023,-0.157,0.103,0.145,0.058,-0.18,0.479,-0.245,-0.016,-0.044,0.288,-0.248,-0.296,0.093,-0.306,-0.165,-0.24,0.337,-0.233,0.201,-0.27,-0.118,0.142,-0.118,-0.157,-0.366,-0.135,-0.317,-0.264,-0.155,-0.263,-0.166,-0.258,-0.155,0.31,-0.505,0.039,0.009,0.019,-0.262,0.332,0.585,-0.249,-0.369,-0.045,-0.177,-0.261,-0.019,-0.245,-0.081,-0.138,0.001,-0.257,-0.227,0.305,-0.244,0.11,-0.172,-0.028,-0.289,-0.234,0.25,-0.522,-0.105,0.117,0.175,0.073,0.136,-0.3,0.189,-0.218,-0.059,-0.221,-0.393,0.288,-0.365,0.356,-0.297,-0.407,-0.217,-0.026,-0.176,-0.302,0.232,0.193,0.388,-0.044,-0.05,0.076,0.026,-0.122,-0.22,-0.228,-0.143,0.149,-0.058,-0.355,0.269,-0.082,0.273,-0.856,-0.43,0.319,0.136,-1.148,0.076,-0.404,-0.796,0.489,-0.508,0.658,0.839,1.283,0.736,-0.267,-0.757,0.156,0.044,0.095,-0.136,-0.198,0.127,-0.23,0.421,0.073,-0.051,-0.156,-0.071,0.077,0.075,-0.2,-0.189,0.129,-0.135,-0.011,0.196,-0.101,-0.169,-0.129,0.275,-0.224,-0.19,0.096,-0.012,-0.271,-0.197,1.094,0.507,0.622,-0.075,-0.157,-0.233,-0.337,-0.082,-0.398,-0.257,-0.393,0.334,0.085,0.278,-0.178,0.134,0.219,0.034,-0.384,-0.088,-0.324,-0.503,-0.131,-0.333,-0.211,-0.283,-0.129,-0.289,-0.282],"windows":[[0,34],[35,69],[70,104],[105,139],[140,174],[175,209],[210,244],[245,279],[280,314],[315,349],[350,384],[385,419],[420,448]],"selected":[66,130,196,262,330,396,462,522,585,646,698,708,718,732,751,768,820],"hybrid":[0,20,26,46,52,64,66,68,86,92,106,124,130,136,156,164,180,192,196,198,214,224,238,256,262,266,282,296,310,314,330,332,340,356,370,380,396,398,412,416,432,437,444,454,462,464,476,482,494,504,508,518,522,524,536,544,552,565,574,585,586,592,606,612,622,630,637,646,648,664,670,680,690,695,698,705,708,712,718,730,732,738,746,751,758,768,770,774,791,800,816,820],"rule":[4,17,28,42,52,62,72,83,95,107,122,137,153,168,182,192,202,216,227,237,252,268,282,296,307,318,328,341,352,360,370,383,396,408,416,428,437,447,456,462,468,477,485,492,501,507,515,527,536,547,556,565,572,578,585,592,602,613,621,630,637,645,651,662,673,680,690,695,702,705,710,715,720,727,730,737,746,751,759,766,778,791,803,815],"anchors":[[0.5234,0.2604],[0.4414,0.8594],[0.3398,0.5677],[0.4531,0.3073],[0.9336,0.5208],[0.4141,0.9792],[0.668,0.5938],[0.0352,0.4427],[0.6016,0.3542],[0.5078,0.5833],[0.1094,0.8698],[0.5352,0.9219],[0.1797,0.5417],[0.7227,0.4219],[0.8984,0.8698],[0.5117,0.2552],[0.1445,0.5104],[0.5508,0.9167],[0.7422,0.6979],[0.3867,0.4948],[0.625,0.75],[0.5195,0.75],[0.6094,0.2031],[0.4531,0.7188],[0.625,0.4844],[0.7812,0.4375],[0.5234,0.2188],[0.7305,0.2604],[0.9492,0.4167],[0.0703,0.5573],[0.7695,0.8333],[0.0078,0.9427],[0.3633,0.9479],[0.4727,0.6771],[0.6992,0.349],[0.332,0.5469],[0.8984,0.6875],[0.8047,0.7188],[0.6992,0.3906],[0.3945,0.3594],[0.8711,0.4167],[0.9219,0.2812],[0.6562,0.6771],[0.3867,0.3438],[0.2812,0.2552],[0.7188,0.2969],[0.8516,0.3385],[0.793,0.4844],[0.3516,0.9635],[0.4141,0.6198],[0.6953,0.2917],[0.043,0.5],[0.9062,0.8594],[0.5742,0.875],[0.7344,0.224],[0.0352,0.2656],[0.4961,0.5938],[0.3594,0.9427],[0.4609,0.2396],[0.0078,0.25],[0.7617,0.8281],[0.3438,0.7865],[0.75,0.1979],[0.5234,0.8229],[0.5195,0.5885],[0.5273,0.7604],[0.4258,0.849],[0.2617,0.4948],[0.0859,0.2812],[0.9727,0.5885],[0.4922,0.2865],[0.2383,0.8438],[0.3164,0.6562],[0.6055,0.25],[0.582,0.3177],[0.1406,0.6094],[0.8086,0.7969],[0.5625,0.651],[0.168,0.4479],[0.6836,0.9271],[0.9219,0.6406],[0.1133,0.599],[0.1367,0.9688],[0.9727,0.276],[0.1367,0.4323],[0.0977,0.25],[0.4492,0.3333],[0.9727,0.4896],[0.6992,0.5104],[0.6641,0.6823],[0.0156,0.625],[0.9297,0.3385],[0.75,0.6562],[0.9297,0.2552],[0.7148,0.2292],[0.4609,0.6198],[0.9375,0.3698],[0.1016,0.3594],[0.6562,0.5104],[0.5508,0.6927],[0.7656,0.4271],[0.7734,0.4167],[0.0938,0.4219],[0.1875,0.4635],[0.5117,0.7292],[0.8203,0.3854],[0.9922,0.8698],[0.5352,0.2969],[0.3672,0.2865],[0.0664,0.7135],[0.1328,0.5469],[0.1719,0.4583],[0.0273,0.2344],[0.0273,0.5417],[0.4727,0.849],[0.5508,0.9062],[0.7852,0.4062],[0.5391,0.8802],[0.0938,0.5729],[0.832,0.7188],[0.4766,0.3802],[0.4531,0.7917],[0.5508,0.7708],[0.7461,0.8073],[0.9141,0.2344],[0.5469,0.7604],[0.625,0.7448],[0.3281,0.4531],[0.5312,0.4792],[0.7266,0.375],[0.6875,0.8229],[0.1953,0.5052],[0.2539,0.4583],[0.1758,0.224],[0.4297,0.4167],[0.9141,0.8802],[0.5781,0.3646],[0.7539,0.4375],[0.1367,0.5208],[0.6211,0.7135],[0.332,0.5365],[0.6133,0.8906],[0.8672,0.6146],[0.8398,0.3854],[0.5703,0.8698],[0.9883,0.8229],[0.0273,0.974],[0.7383,0.8021],[0.0977,0.6875],[0.5938,0.3229],[0.1406,0.2448],[0.75,0.9375],[0.5039,0.276],[0.7344,0.9792],[0.8555,0.7188],[0.3867,0.5156],[0.3242,0.474],[0.5625,0.8854],[0.0469,0.2396],[0.3672,0.4323],[0.9609,0.5365],[0.6484,0.9531],[0.043,0.3698],[0.4102,0.9219],[0.582,0.2135],[0.6719,0.3958],[0.4688,0.526],[0.5977,0.4427],[0.0078,0.4167],[0.2852,0.6823],[0.1523,0.2396],[0.8555,0.5],[0.6602,0.3073],[0.0742,0.3438],[0.1133,0.4635],[0.7656,0.375],[0.457,0.224],[0.3516,0.7135],[0.293,0.3385],[0.4688,0.349],[0.6406,0.5],[0.9023,0.6562],[0.7383,0.7396],[0.6875,0.3385],[0.5039,0.4688],[0.3828,0.6562],[0.3047,0.6875],[0.8945,0.8073],[0.8008,0.8594],[0.418,0.5781],[0.3555,0.3229],[0.7305,0.3229],[0.9531,0.2552],[0.2031,0.5104],[0.5625,0.3594],[0.2461,0.6302],[0.8945,0.6562],[0.8398,0.5521],[0.9219,0.8021],[0.793,0.5781],[0.5859,0.8125],[0.6797,0.349],[0.8359,0.8698],[0.2031,0.2135],[0.2773,0.7656],[0.5,0.6979],[0.0391,0.3438],[0.1992,0.625],[0.1406,0.4792],[0.8828,0.3594],[0.375,0.625],[0.2305,0.2969],[0.2305,0.2708],[0.7109,0.7917],[0.0625,0.5781],[0.0859,0.1979],[0.7227,0.4062],[0.6836,0.6042],[0.5156,0.4896],[0.918,0.4219],[0.0586,0.9219],[0.3008,0.5104],[0.6641,0.3542],[0.5508,0.3177],[0.043,0.2135],[0.9062,0.6927],[0.4922,0.7083],[0.5664,0.2969],[0.6094,0.375],[0.1602,0.7188],[0.2734,0.3385],[0.1797,0.7708],[0.7188,0.7708],[0.8125,0.2812],[0.5977,0.7656],[0.6562,0.25],[0.5625,0.5],[0.5391,0.8958],[0.2266,0.8177],[0.8242,0.8333],[0.3516,0.4271],[0.5898,0.4062],[0.3516,0.8854],[0.8867,0.6615],[0.6797,0.5833],[0.3008,0.3438],[0.3828,0.3958],[0.1719,0.4375],[0.5039,0.3854],[0.875,0.4583],[0.2539,0.4427],[0.3164,0.8177],[0.6445,0.5885],[0.4883,0.6562],[0.3047,0.2917],[0.0195,0.9323],[0.4648,0.7031],[0.3789,0.5885],[0.6211,0.4479],[0.4922,0.9323]],"swapped":65,"added":14};
+const C={bg:'#f9f8f4',ink:'#202121',muted:'#697171',line:'#deded6',grid:'#e7e5dd',teal:'#257e6d',wine:'#800000',cut:'#c25a2c',panel:'#f1efe8',card:'#ffffff'};
+const F='"Segoe UI",Arial,sans-serif', MONO='Consolas,"SFMono-Regular",Menlo,monospace';
+const W=1600,H=900,cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const IMG={};['fig_frame.jpg','depth462.jpg','sky462.png','fig_ref4k.jpg','fig_hybrid92.jpg'].forEach(n=>{const im=new Image();im.src=(window.ASSETS&&ASSETS[n])||n;IMG[n]=im;im.onload=()=>{if(!playing)draw()}});
+const ok=im=>im&&im.complete&&im.naturalWidth>0;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),lerp=(a,b,t)=>a+(b-a)*t,seg=(p,a,b)=>clamp((p-a)/(b-a)),ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2,out=t=>1-Math.pow(1-t,3);
+let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+const sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],add=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]],mul=(a,s)=>[a[0]*s,a[1]*s,a[2]*s],dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2],cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],norm=a=>{const l=Math.hypot(...a);return [a[0]/l,a[1]/l,a[2]/l]};
+function cam(eye,t,fov=.9){const f=norm(sub(t,eye)),r=norm(cross(f,[0,1,0])),u=cross(r,f);return {eye,f,r,u,fl:1/Math.tan(fov/2)}}
+function proj(c,p,cx=W/2,cy=H/2,s=H/2){const d=sub(p,c.eye),z=dot(d,c.f);if(z<.2)return null;return [cx+dot(d,c.r)/z*c.fl*s,cy-dot(d,c.u)/z*c.fl*s,z]}
+const hex=(h,a=1)=>{const n=parseInt(h.slice(1),16);return `rgba(${n>>16},${n>>8&255},${n&255},${a})`},rgb=(c,a=1)=>`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${a})`;
+
+// schematic campus for 3D sketches
+const PTS=[];(function(){
+ for(let i=0;i<2300;i++){const x=lerp(-8,8,rnd()),z=lerp(-5.5,5.5,rnd()),n=Math.sin(x*.9)+Math.cos(z*1.3)+Math.sin((x+z)*.5);
+  const path=Math.abs(z-.15*x-2.6)<.25||Math.abs(x+.3*z-4.2)<.22;const c=path?[178,170,152]:n>.6?[86,112,52]:n>-.4?[150,122,78]:[108,128,68];PTS.push({p:[x,0,z],c:c.map(v=>v+(rnd()-.5)*22),k:'g'})}
+ function box(cx,cz,w,d,h,rot,roof,wall,n){const cr=Math.cos(rot),sr=Math.sin(rot),put=(u,y,v,c)=>PTS.push({p:[cx+u*cr-v*sr,y,cz+u*sr+v*cr],c:c.map(t=>t+(rnd()-.5)*16),k:'b'});
+  for(let i=0;i<n;i++){const s=rnd();if(s<.5)put(lerp(-w/2,w/2,rnd()),h,lerp(-d/2,d/2,rnd()),roof);else if(s<.75)put(lerp(-w/2,w/2,rnd()),rnd()*h,(rnd()<.5?-1:1)*d/2,rnd()<.35?[140,62,52]:wall);else put((rnd()<.5?-1:1)*w/2,rnd()*h,lerp(-d/2,d/2,rnd()),wall)}}
+ box(-2.3,.9,5.2,1.5,2.1,.52,[150,150,148],[112,114,120],520);box(2.3,.9,5.2,1.5,2.1,-.52,[150,150,148],[112,114,120],520);box(0,-3.6,5.4,1.9,1.6,0,[140,142,146],[100,106,116],380);box(5.6,2.8,1.8,1.3,.9,.1,[160,160,156],[130,130,126],120);
+ for(let i=0;i<170;i++){const a=rnd()*Math.PI*2,e=rnd()*Math.PI/2;PTS.push({p:[.85*Math.cos(e)*Math.cos(a),2.1+.85*Math.sin(e),-.4+.85*Math.cos(e)*Math.sin(a)],c:[40+rnd()*30,100+rnd()*30,140+rnd()*30],k:'b'})}
+ for(let i=0;i<150;i++)PTS.push({p:[lerp(-6,6,rnd()),lerp(3,5.2,rnd()),lerp(-4,4,rnd())],c:[194,90,44],k:'n'})})();
+const PATH=[];for(let i=0;i<24;i++){const a=lerp(-1.05,1.05,i/23),eye=[8.5*Math.sin(a),6.2+.3*Math.sin(i*.7),8.5*Math.cos(a)];PATH.push({eye,c:cam(eye,[0,.6,0])})}
+const SEL=[1,4,7,9,12,15,18,21];
+const viewCam=(t,r=15,h=15)=>{const b=-.3+.45*t;return cam([r*Math.sin(b),h,r*Math.cos(b)],[0,0,-.8],.85)};
+function drawPoints(vc,filter,af,size=2.4){const L=[];for(const q of PTS){if(!filter(q))continue;const s=proj(vc,q.p);if(s)L.push([s,q])}L.sort((a,b)=>b[0][2]-a[0][2]);
+ for(const [s,q] of L){const a=af(q);if(a<=.01)continue;ctx.fillStyle=rgb(q.c,a);const r=size*9/s[2]*1.6;ctx.fillRect(s[0]-r/2,s[1]-r/2,r,r)}}
+function frustum(vc,P,col,alpha=1,sz=.42,fill=.12){const c=P.c,e=P.eye,f=add(e,mul(c.f,sz)),cs=[[-1,-1],[1,-1],[1,1],[-1,1]].map(([a,b])=>add(f,add(mul(c.r,a*sz*.8),mul(c.u,b*sz*.45))));
+ const E=proj(vc,e),Q=cs.map(p=>proj(vc,p));if(!E||Q.some(q=>!q))return;ctx.strokeStyle=hex(col,alpha);ctx.lineWidth=1.6;ctx.beginPath();for(const q of Q){ctx.moveTo(E[0],E[1]);ctx.lineTo(q[0],q[1])}
+ ctx.moveTo(Q[0][0],Q[0][1]);Q.slice(1).forEach(q=>ctx.lineTo(q[0],q[1]));ctx.closePath();ctx.stroke();ctx.fillStyle=hex(col,alpha*fill);ctx.beginPath();ctx.moveTo(Q[0][0],Q[0][1]);Q.slice(1).forEach(q=>ctx.lineTo(q[0],q[1]));ctx.fill()}
+function groundGrid(vc,a){ctx.strokeStyle=hex('#cfcdc3',a);ctx.lineWidth=1;for(let x=-8;x<=8;x+=2){const p=proj(vc,[x,0,-5.5]),q=proj(vc,[x,0,5.5]);if(p&&q){ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke()}}
+ for(let z=-5.5;z<=5.5;z+=1.83){const p=proj(vc,[-8,0,z]),q=proj(vc,[8,0,z]);if(p&&q){ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke()}}}
+function text(s,x,y,{size=26,color=C.ink,font=F,weight=500,align='left',alpha=1,ls=0}={}){ctx.globalAlpha=alpha;ctx.fillStyle=color;ctx.font=`${weight} ${size}px ${font}`;ctx.textAlign=align;ctx.textBaseline='alphabetic';if(ctx.letterSpacing!==undefined)ctx.letterSpacing=ls+'px';ctx.fillText(s,x,y);if(ctx.letterSpacing!==undefined)ctx.letterSpacing='0px';ctx.globalAlpha=1}
+function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+function pill(s,x,y,col,alpha=1,size=19){ctx.font=`600 ${size}px ${F}`;const w=ctx.measureText(s).width+26,h=size+16;ctx.globalAlpha=alpha;ctx.fillStyle=hex(col,.09);rr(x,y-h+6,w,h,h/2);ctx.fill();ctx.strokeStyle=hex(col,.55);ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle=col;ctx.textAlign='left';ctx.fillText(s,x+13,y-4);ctx.globalAlpha=1;return w}
+function frame(img,x,y,w,h,{alpha=1,stroke=C.line,sx=0,sy=0,sw=null,sh=null}={}){if(!ok(img)){ctx.fillStyle=hex('#e7e5dd',alpha);ctx.fillRect(x,y,w,h);return}ctx.globalAlpha=alpha;ctx.drawImage(img,sx,sy,sw||img.naturalWidth-sx,sh||img.naturalHeight-sy,x,y,w,h);ctx.globalAlpha=1;if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.strokeRect(x,y,w,h)}}
+function arrow(x1,y1,x2,y2,col,a=1,w=2.5){ctx.strokeStyle=hex(col,a);ctx.fillStyle=hex(col,a);ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const an=Math.atan2(y2-y1,x2-x1);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-13*Math.cos(an-.45),y2-13*Math.sin(an-.45));ctx.lineTo(x2-13*Math.cos(an+.45),y2-13*Math.sin(an+.45));ctx.fill()}
+function pulse(x1,y1,x2,y2,T,col,off=0){const ph=(T*.9+off)%1;ctx.fillStyle=col;ctx.beginPath();ctx.arc(lerp(x1,x2,ph),lerp(y1,y2,ph),4.5,0,7);ctx.fill()}
+function heading(stage,s,a=1){text(`0${stage} / ${['CAPTURE & POSES','FRAME UTILITY','SELECT & SOURCE','ESTIMATE DEPTH','FUSE & VERIFY','MESH & INSPECT'][stage-1]}`,60,74,{size:16,color:C.wine,weight:750,ls:2.4,alpha:a});text(s,60,118,{size:38,weight:600,alpha:a,ls:-1})}
+function badge(real){const s=real?'REAL DATA':'SCHEMATIC';ctx.font=`700 15px ${F}`;const w=ctx.measureText(s).width+30;pill(s,W-60-w,82,real?C.teal:C.muted,1,15)}
+function jello(img,x,y,w,h,amp,ph){if(!ok(img))return frame(img,x,y,w,h);const N=48,ih=img.naturalHeight,iw=img.naturalWidth;for(let i=0;i<N;i++){const dx=amp*Math.sin(i/N*Math.PI*2.2+ph);ctx.drawImage(img,0,ih*i/N,iw,ih/N+1,x+dx,y+h*i/N,w,h/N+1)}}
+function box(x,y,w,h,title,subt,col,a=1,filled=false){ctx.globalAlpha=a;ctx.fillStyle=filled?col:C.card;rr(x,y,w,h,8);ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke();ctx.globalAlpha=1;
+ text(title,x+16,y+32,{size:20,weight:650,color:filled?'#fff':C.ink,alpha:a});if(subt)text(subt,x+16,y+58,{size:16,color:filled?'rgba(255,255,255,.85)':C.muted,alpha:a})}
+const FR=1500/844;
+
+const STAGES=[['Capture & poses','RGB · de-jello · tracking'],['Frame utility','Candidate · map · occupant'],['Select & source','ADD · SWAP · KEEP'],['Estimate depth','Posed, past-only student'],['Fuse & verify','Sky masks · 5-view support'],['Mesh & inspect','Triangles · textures · GLB']];
+const S=[
+{st:1,t:'The input',d:7,real:true,body:'A 27-second 4K drone video goes in. Neighbouring frames mostly repeat each other, and some are blurred or warped by the rolling shutter, so processing all of them wastes most of the time.',
+ kv:[['Frames','822'],['Resolution','3840 × 2160'],['Frame rate','30 fps']],
+ draw(p,T){heading(1,'A 4K drone video comes in');badge(true);const w=820,h=w/FR,x=(W-w)/2,y=165,pan=60+180*((T*.05)%1);
+  frame(IMG['fig_frame.jpg'],x,y,w,h,{sx:pan,sy:20,sw:1240,sh:1240/FR});const f=Math.floor(T*30)%822;
+  text(`REC_0001 · frame ${String(f).padStart(3,'0')} / 822`,x+16,y+h-18,{size:18,font:MONO,color:'#fff'});ctx.fillStyle=C.wine;ctx.beginPath();ctx.arc(x+w-30,y+28,8,0,7);ctx.fill();
+  const tw=176,th=tw/FR,gap=16,ty=y+h+52,off=(T*90)%(tw+gap);ctx.save();ctx.beginPath();ctx.rect(40,ty-30,W-80,th+80);ctx.clip();
+  for(let i=-1;i<10;i++){const tx=40+i*(tw+gap)-off,k=Math.floor(T*90/(tw+gap))+i,sx=(k*53)%240,kind=k%7==3?'blurred':k%9==5?'jello':k%4==1?'repeats a neighbour':'';
+   if(kind==='jello')jello(IMG['fig_frame.jpg'],tx,ty,tw,th,7,k);else{if(kind==='blurred')ctx.filter='blur(4px)';frame(IMG['fig_frame.jpg'],tx,ty,tw,th,{sx,sy:30,sw:1200,sh:1200/FR,alpha:kind==='repeats a neighbour'?.4:1,stroke:null});ctx.filter='none'}
+   if(kind)pill(kind,tx,ty+th+36,kind==='repeats a neighbour'?C.muted:C.cut,seg(p,.15,.35),15)}ctx.restore();
+  text('one 4K image every 33 ms',W/2,ty-14,{size:17,color:C.muted,align:'center'})}},
+{st:1,t:'Rolling-shutter correction',d:6,real:true,body:'The sensor reads rows one after another while the drone moves, so straight edges wobble. We correct this first, because a wobbly frame gives wrong camera poses and wrong depth.',
+ kv:[['Applied to','every frame'],['Output','de-jello video']],
+ draw(p,T){heading(1,'Straighten the wobble (de-jello)');badge(true);const w=1000,h=w/FR,x=(W-w)/2,y=160,fix=ease(seg(p,.4,.85));jello(IMG['fig_frame.jpg'],x,y,w,h,18*(1-fix),T*3);
+  if(p<.85){const sy=y+((T*.9)%1)*h;ctx.fillStyle=hex(C.teal,.18);ctx.fillRect(x,sy-10,w,20);ctx.fillStyle=C.teal;ctx.fillRect(x,sy-1,w,2);text('rows read out one by one',x+w+16,sy+6,{size:17,color:C.teal,alpha:1-fix})}
+  ctx.strokeStyle=C.line;ctx.lineWidth=2;ctx.strokeRect(x,y,w,h);pill(fix<.98?'warped: edges bend between rows':'corrected: edges are straight again',x,y+h+56,fix<.98?C.cut:C.teal)}},
+{st:1,t:'Camera poses',d:8,real:false,body:'Structure-from-Motion finds where the camera was for each keyframe, plus a sparse set of 3D points. All 449 candidate frames are then registered into the same model, so every later step works in one coordinate frame.',
+ kv:[['Keyframes posed','84 in ≈1 min'],['Candidates registered','449'],['Reprojection error','0.80 px']],
+ draw(p,T){const vc=viewCam(p);groundGrid(vc,.8);const sh=seg(p,.05,.6);let k=0;drawPoints(vc,q=>q.k!=='n'&&(q.k==='b'||k++%2===0),q=>sh>((q.p[0]+8)/16)?(q.k==='b'?.95:.65):0,3);
+  const n=Math.floor(lerp(0,PATH.length,seg(p,.15,.85)));ctx.setLineDash([6,8]);ctx.strokeStyle=hex(C.teal,.6);ctx.lineWidth=2;ctx.beginPath();PATH.slice(0,n).forEach((P,i)=>{const s=proj(vc,P.eye);if(s)i?ctx.lineTo(s[0],s[1]):ctx.moveTo(s[0],s[1])});ctx.stroke();ctx.setLineDash([]);
+  PATH.slice(0,n).forEach((P,i)=>frustum(vc,P,C.teal,i===n-1?1:.8));heading(1,'Where was the camera? (SfM)');badge(false);
+  pill(`${Math.round(lerp(0,84,seg(p,.15,.85)))} keyframes posed`,60,830,C.teal);pill('449 candidates registered · 0.80 px',320,830,C.teal,seg(p,.7,.9))}},
+{st:2,t:'Frame utility model',d:10,real:false,body:'For each candidate, a ResNet18 encoder turns the image into a 384-d embedding. Three tokens (the map state, the candidate and the frame currently holding its view bin, the occupant) pass through a four-layer Transformer. The ADD head scores an empty bin; the SWAP head scores replacing the occupant.',
+ kv:[['Image encoder','ResNet18 → 384-d'],['Map state','36-d'],['Context','4-layer Transformer'],['Heads','ADD · SWAP']],
+ draw(p,T){heading(2,'How useful is this frame to the map?');badge(false);
+  const tw=230,th=tw/FR,a1=seg(p,0,.15),a2=seg(p,.1,.25),a3=seg(p,.2,.35);
+  frame(IMG['fig_frame.jpg'],60,190,tw,th,{alpha:a1});text('candidate',60,180,{size:17,color:C.muted,alpha:a1});
+  frame(IMG['fig_frame.jpg'],60,400,tw,th,{alpha:a2*.9,sx:200,sy:60,sw:1100,sh:1100/FR});text('occupant (already in this view bin)',60,390,{size:17,color:C.muted,alpha:a2});
+  box(60,610,tw,110,'map state','pose, overlap, quality',C.teal,a3);text('36-d',60+tw-16,642,{size:16,color:C.teal,align:'right',weight:650,alpha:a3});
+  box(350,215,170,80,'ResNet18','encoder',C.ink,a1);box(350,425,170,80,'ResNet18','shared weights',C.ink,a2);
+  arrow(60+tw+6,190+th/2,346,255,C.ink,a1*.7);arrow(60+tw+6,400+th/2,346,465,C.ink,a2*.7);
+  const tok=[[255,'candidate token','384-d → 256',C.wine,a1],[465,'occupant token','384-d → 256',C.wine,a2],[665,'map token','36-d → 256',C.teal,a3]];
+  tok.forEach(([y,l,s,col,a])=>{arrow(y===665?60+tw+6:524,y,596,y,col,a*.7);ctx.globalAlpha=a;for(let i=0;i<12;i++){ctx.fillStyle=hex(col,.25+.6*Math.abs(Math.sin(i*1.3+y)));ctx.fillRect(600+i*15,y-18,11,36)}ctx.globalAlpha=1;text(l,600,y-28,{size:16,color:C.ink,weight:600,alpha:a});text(s,600,y+42,{size:14,color:C.muted,alpha:a})});
+  const at=seg(p,.35,.5);ctx.globalAlpha=at;for(let l=3;l>=0;l--){ctx.fillStyle=l?'#efede6':C.card;rr(860+l*10,230-l*10,260,470,10);ctx.fill();ctx.strokeStyle=C.ink;ctx.lineWidth=1.5;ctx.stroke()}ctx.globalAlpha=1;
+  text('Transformer',990,320,{size:26,weight:650,align:'center',alpha:at});text('4 layers · 8 heads',990,352,{size:17,color:C.muted,align:'center',alpha:at});text('width 256',990,378,{size:17,color:C.muted,align:'center',alpha:at});
+  if(at>.5){for(const y of [255,465,665]){for(const y2 of [430,500,570]){ctx.strokeStyle=hex(C.ink,.1);ctx.beginPath();ctx.moveTo(880,y2);ctx.lineTo(1100,y2+(y-465)*.08);ctx.stroke()}}
+   [[255,0],[465,.33],[665,.66]].forEach(([y,o])=>{pulse(785,y,880,lerp(430,570,o),T,hex(C.wine,.9),o)})}
+  text('attention mixes candidate, occupant and map',990,640,{size:15,color:C.muted,align:'center',alpha:at});
+  const ah=seg(p,.55,.7);arrow(1124,400,1196,330,C.ink,ah*.7);arrow(1124,520,1196,590,C.ink,ah*.7);
+  box(1200,280,300,96,'ADD head','bin is empty',C.wine,ah,false);box(1200,540,300,96,'SWAP head','bin has an occupant',C.wine,ah,false);
+  const ad=seg(p,.72,.9);text('predicted gain ĝ(a)',1350,450,{size:22,weight:650,color:C.wine,align:'center',alpha:ad});
+  let x=1200;[['ADD',C.wine],['SWAP',C.wine],['KEEP',C.muted]].forEach(([s,col],i)=>{x+=pill(s,x,770,col,seg(p,.8+i*.04,.9+i*.04),19)+10});
+  text('if ĝ > τ act, else keep the map',1200,805,{size:15,color:C.muted,alpha:seg(p,.85,.95)})}},
+{st:2,t:'Training signal',d:8,real:true,body:'No dataset says which frames matter, so we measured it. Each training scene is reconstructed with and without the action (add a frame, or swap one), using the same depth model, and the change in surface F-score becomes the label. The selector learns to predict it.',
+ kv:[['Training images','149,637'],['Dataset families','9'],['Labelled rows','258,573'],['Held-out AUC','0.74']],
+ draw(p,T){heading(2,'Training: measure what an action is worth');badge(true);
+  const panel=(x,lab,hole,a)=>{ctx.globalAlpha=a;ctx.fillStyle=C.panel;rr(x,190,430,300,10);ctx.fill();ctx.globalAlpha=1;const vc=cam([9,10,13],[0,.4,-.5],.9);
+   ctx.save();ctx.beginPath();rr(x,190,430,300,10);ctx.clip();ctx.translate(x+215,355);ctx.scale(.42,.42);ctx.translate(-W/2,-H/2);drawPoints(vc,q=>q.k!=='n'&&(!hole||Math.hypot(q.p[0]-2.2,q.p[2]-1)>1.8),()=>a*.95,2.4);ctx.restore();text(lab,x+18,226,{size:20,weight:600,alpha:a})};
+  panel(80,'map S ⊕ a',false,seg(p,0,.15));panel(560,'map S',true,seg(p,.12,.27));
+  const ab=seg(p,.28,.45);[['F(S ⊕ a)',80,.85],['F(S)',560,.62]].forEach(([l,x,v])=>{ctx.fillStyle=hex(C.teal,.85*ab);ctx.fillRect(x,550,430*v*ab,26);text(l,x,610,{size:20,font:MONO,color:C.muted,alpha:ab})});
+  const ag=seg(p,.45,.58);text('g(a) = F(S ⊕ a) − F(S)',80,690,{size:32,font:MONO,color:C.wine,alpha:ag});text('bars are illustrative; labels come from real re-fusions',80,728,{size:16,color:C.muted,alpha:ag});
+  const ac=seg(p,.55,.9);if(ac>0){text(Math.round(258573*out(ac)).toLocaleString('en-US'),1300,300,{size:62,weight:650,color:C.wine,align:'center',ls:-2});text('labelled training rows',1300,336,{size:18,color:C.muted,align:'center'})}
+  [['JB3D','70,341'],['UAVScenes','54,343'],['Tanks & Temples','12,929'],['M3ED','3,848'],['NTU VIRAL','3,626'],['UAVLight','2,430'],['KITTI','1,048'],['Dronescapes','816'],['MatrixCity','256']].forEach(([n,c],i)=>{const a=seg(p,.6+i*.03,.68+i*.03),col=i%2,row=Math.floor(i/2);
+   text(n,1110+col*240,420+row*56,{size:18,weight:600,alpha:a});text(c,1110+col*240+200,420+row*56,{size:16,color:C.muted,align:'right',alpha:a,font:MONO})})}},
+{st:3,t:'Select & source',d:10,real:true,body:'The line is the selector\'s real score for all 449 candidates. Walking through the video, each view bin keeps one occupant: an empty bin gets an ADD, a better frame triggers a SWAP, otherwise KEEP. That leaves 17 frames. The combined mode starts from 84 rule keyframes, swaps 65 for better nearby frames and adds 14: 92 frames.',
+ kv:[['Candidates scored','449'],['Selector alone','17 frames (2%)'],['Combined set','92 frames'],['Swapped / added','65 / 14']],
+ draw(p,T){heading(3,'Score every frame, keep the useful ones');badge(true);if(!DATA)return;
+  const x0=110,x1=1490,y0=200,y1=550,X=f=>x0+(x1-x0)*f/822,sc=DATA.score,mn=Math.min(...sc),mx=Math.max(...sc),Y=v=>y1-(y1-y0)*(v-mn)/(mx-mn);
+  ctx.strokeStyle=C.grid;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x0,Y(0));ctx.lineTo(x1,Y(0));ctx.stroke();
+  const aw=seg(p,.3,.42);DATA.windows.forEach(([a,b],i)=>{ctx.fillStyle=hex(i%2?'#000000':C.teal,(i%2?.025:.06)*aw);ctx.fillRect(X(DATA.cand[a]),y0-20,X(DATA.cand[b])-X(DATA.cand[a]),y1-y0+40)});text('view bins',x0,y0-30,{size:16,color:C.muted,alpha:aw});
+  const n=Math.floor(sc.length*seg(p,0,.3));ctx.strokeStyle=hex(C.ink,.55);ctx.lineWidth=1.5;ctx.beginPath();for(let i=0;i<n;i++){const xx=X(DATA.cand[i]),yy=Y(sc[i]);i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy)}ctx.stroke();
+  const idx=new Map(DATA.cand.map((f,i)=>[f,i])),as=seg(p,.4,.55);DATA.selected.forEach((f,i)=>{const a=clamp(as*17-i);if(a<=0)return;const yy=Y(sc[idx.get(f)]??0)-30*(1-out(a));ctx.fillStyle=hex(C.wine,a);ctx.beginPath();ctx.arc(X(f),yy,9,0,7);ctx.fill()});
+  if(as>0)pill(`final occupant of each bin: ${Math.round(17*as)} frames (2% of the video)`,x0,y1+70,C.wine,as);text('time →',x1,y1+28,{size:16,color:C.muted,align:'right'});
+  const ar=seg(p,.58,.68),ah=seg(p,.72,.92),yr=700,yh=800;
+  if(ar>0){text('rule keyframes (84)',x0,yr-24,{size:17,color:C.teal,weight:600,alpha:ar});DATA.rule.forEach((f,i)=>{if(i/84>ar)return;ctx.fillStyle=C.teal;ctx.fillRect(X(f)-1.5,yr-12,3,24)})}
+  if(ah>0){text('combined set (92): teal kept, wine swapped or added',x0,yh-24,{size:17,color:C.wine,weight:600,alpha:ah});const rs=new Set(DATA.rule);
+   DATA.hybrid.forEach((f,i)=>{let r=DATA.rule[0];for(const q of DATA.rule)if(Math.abs(q-f)<Math.abs(r-f))r=q;const a=clamp(ah*1.4-i/92*.4);ctx.fillStyle=hex(rs.has(f)?C.teal:C.wine,a);ctx.fillRect(lerp(X(r),X(f),out(a))-1.5,lerp(yr,yh,out(a))-12,3,24)})}}},
+{st:4,t:'Estimate depth',d:7,real:true,body:'Our depth network (the student) predicts a depth map for each kept frame using only past frames. Sparse SfM points anchor it, so its depths agree in scale with the camera poses. Shown: its real output for frame 462.',
+ kv:[['Network','depth student'],['Context','posed, past frames only'],['Scale anchors','triangulated SfM tracks']],
+ draw(p,T){heading(4,'Estimate depth with our network');badge(true);const w=1000,h=w/FR,x=(W-w)/2,y=160,wipe=ease(seg(p,.35,.8));frame(IMG['fig_frame.jpg'],x,y,w,h);
+  const aa=seg(p,.1,.3);if(DATA&&aa>0)DATA.anchors.forEach(([u,v],i)=>{if(i/DATA.anchors.length>aa)return;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(x+u*w,y+v*h,4.5,0,7);ctx.fill();ctx.fillStyle=C.teal;ctx.beginPath();ctx.arc(x+u*w,y+v*h,3,0,7);ctx.fill()});
+  if(wipe>0&&ok(IMG['depth462.jpg'])){ctx.save();ctx.beginPath();ctx.rect(x,y,w*wipe,h);ctx.clip();ctx.drawImage(IMG['depth462.jpg'],x,y,w,h);ctx.restore();ctx.fillStyle=C.wine;ctx.fillRect(x+w*wipe-2,y,4,h)}
+  ctx.strokeStyle=C.line;ctx.lineWidth=2;ctx.strokeRect(x,y,w,h);pill('SfM anchor points',x,y+h+58,C.teal,aa);
+  const lg=seg(p,.6,.75);if(lg>0){const gx=x+w-340,gy=y+h+30,gr=ctx.createLinearGradient(gx,0,gx+300,0);['#7a0403','#f7531f','#e5e530','#30c2ab','#4662d7','#30123b'].forEach((c,i)=>gr.addColorStop(i/5,c));ctx.globalAlpha=lg;ctx.fillStyle=gr;ctx.fillRect(gx,gy,300,16);ctx.globalAlpha=1;text('near',gx,gy+40,{size:16,color:C.muted,alpha:lg});text('far',gx+300,gy+40,{size:16,color:C.muted,align:'right',alpha:lg})}}},
+{st:5,t:'Mask the sky',d:6,real:true,body:'A semantic network labels sky and moving objects in every frame. Depth in those pixels is thrown away before fusion; otherwise the sky becomes floating noise above the model.',
+ kv:[['Sky in frame 462','15%'],['Also masked','people, vehicles']],
+ draw(p,T){heading(5,'Mask the sky before fusing');badge(true);const w=700,h=w/FR,y=220,xl=110,xr=W-110-w,m=seg(p,.15,.4),cut=seg(p,.5,.8);
+  frame(IMG['fig_frame.jpg'],xl,y,w,h);if(ok(IMG['sky462.png'])){ctx.globalAlpha=m;ctx.drawImage(IMG['sky462.png'],xl,y,w,h);ctx.globalAlpha=1}text('semantic mask',xl,y-16,{size:18,color:C.muted});pill('sky',xl+14,y+50,C.cut,m,16);
+  if(ok(IMG['depth462.jpg'])&&ok(IMG['sky462.png'])){const oc=document.createElement('canvas');oc.width=w;oc.height=h;const o=oc.getContext('2d');o.drawImage(IMG['depth462.jpg'],0,0,w,h);o.globalAlpha=cut;o.globalCompositeOperation='destination-out';o.drawImage(IMG['sky462.png'],0,0,w,h);o.drawImage(IMG['sky462.png'],0,0,w,h);ctx.fillStyle=C.panel;ctx.fillRect(xr,y,w,h);ctx.drawImage(oc,xr,y)}
+  text('depth used for fusion',xr,y-16,{size:18,color:C.muted});ctx.strokeStyle=C.line;ctx.lineWidth=2;ctx.strokeRect(xl,y,w,h);ctx.strokeRect(xr,y,w,h);arrow(xl+w+16,y+h/2,xr-16,y+h/2,C.wine,1,3);pill('sky depth dropped',xr,y+h+58,C.cut,cut)}},
+{st:5,t:'Fuse & verify',d:9,real:false,body:'Each kept frame projects its depth into 3D. A point survives only where at least 5 views agree, and every camera\'s sky mask votes out points it sees as sky. Floating noise disappears; buildings and ground stay.',
+ kv:[['Agreement needed','≥ 5 views'],['Sky voting','every camera'],['Removed in our runs','2–4% of faces']],
+ draw(p,T){const vc=viewCam(.2+.6*p,16,10);groundGrid(vc,.7);const k=Math.floor(lerp(0,SEL.length,seg(p,.05,.65))),cur=SEL[Math.min(k,SEL.length-1)];
+  PATH.forEach((P,i)=>{if(SEL.includes(i))frustum(vc,P,SEL.indexOf(i)<k?C.wine:'#b9b7ae',SEL.indexOf(i)<k?.9:.7)});const prog=seg(p,.05,.65),no=seg(p,.7,.85);
+  drawPoints(vc,()=>true,q=>{const h=Math.abs(q.p[0]*13.1+q.p[2]*7.7)%1;if(q.k==='n')return h<prog*1.2?.9*(1-no):0;return h<prog?.95:0},2.6);
+  if(p<.68){const E=proj(vc,PATH[cur].eye);if(E){ctx.strokeStyle=hex(C.wine,.2);ctx.lineWidth=1;for(let i=0;i<26;i++){const q=PTS[(Math.floor(T*40)+i*89)%PTS.length];if(q.k==='n')continue;const s=proj(vc,q.p);if(s){ctx.beginPath();ctx.moveTo(E[0],E[1]);ctx.lineTo(s[0],s[1]);ctx.stroke()}}}}
+  heading(5,'Fuse depth from many views');badge(false);let x=60;x+=pill(`views fused: ${k}`,x,830,C.wine)+12;x+=pill('≥ 5 views agree',x,830,C.teal,seg(p,.4,.55))+12;pill('sky votes remove floating points',x,830,C.cut,no)}},
+{st:6,t:'Mesh & inspect',d:10,real:true,body:'The fused points become a triangle mesh, and the original 4K frames paint its texture. Left: the slow native-4K reference. Right: our combined run. Times were measured on the same shared GPU.',
+ kv:[['4K reference','70.7 min dense · ≈90 min textured'],['Ours, 17 learned frames','8.3 min · 97% of surface'],['Ours, DA3 backbone','8.6 min · F 0.95']],
+ draw(p,T){heading(6,'Mesh, texture, inspect');badge(true);const w=700,h=w*630/1500,y=165,xl=110,xr=W-110-w,a=seg(p,.05,.3),b=seg(p,.15,.4);
+  frame(IMG['fig_ref4k.jpg'],xl,y,w,h,{alpha:a});frame(IMG['fig_hybrid92.jpg'],xr,y,w,h,{alpha:b});text('native-4K MVS (reference)',xl,y-14,{size:18,color:C.muted,alpha:a});text('ours: combined frames + masked fusion',xr,y-14,{size:18,color:C.wine,weight:600,alpha:b});
+  const rows=[['Native-4K MVS, textured',90,'≈90 min','#9a9f9c'],['Native-4K MVS, dense only',70.7,'70.7 min','#9a9f9c'],['Ours, DA3 depth (F 0.95)',8.6,'8.6 min',C.wine],['Ours, 17 learned frames',8.3,'8.3 min',C.wine]];
+  const bx=540,by=y+h+64,bw=860;rows.forEach(([l,v,s,col],i)=>{const g=seg(p,.45+i*.07,.62+i*.07),yy=by+i*46;text(l,bx-20,yy+19,{size:18,align:'right',alpha:g?1:.35});ctx.fillStyle=col;ctx.fillRect(bx,yy,bw*v/90*out(g),26);text(s,bx+bw*v/90*out(g)+12,yy+20,{size:18,weight:600,alpha:g})});
+  text('minutes on one shared GPU',bx,by+rows.length*46+18,{size:15,color:C.muted,alpha:seg(p,.8,.9)})}},
+];
+
+const starts=[];let tot=0;for(const s of S){starts.push(tot);tot+=s.d}
+let T=0,playing=!reduced,last=null,shown=-1,inViewport=false;
+const flow=document.getElementById('flow');
+STAGES.forEach(([t,s],i)=>{const b=document.createElement('button');b.type='button';b.className='stage';b.dataset.role=['pose','selector','selector','depth','fusion','export'][i];b.innerHTML=`<i></i><b>0${i+1}</b><strong>${t}</strong><small>${s}</small>`;b.onclick=()=>go(S.findIndex(x=>x.st===i+1));flow.appendChild(b)});
+const sceneAt=t=>{for(let i=S.length-1;i>=0;i--)if(t>=starts[i])return i;return 0};
+function panel(i){if(i===shown)return;shown=i;const s=S[i];document.getElementById('num').textContent='0'+s.st;document.getElementById('sub').textContent=`${STAGES[s.st-1][0]} · step ${i+1} of ${S.length}`;
+ document.getElementById('title').textContent=s.t;const pl=document.getElementById('pill');pl.textContent=s.real?'Real data':'Schematic';pl.className='pill '+(s.real?'real':'sk');
+ document.getElementById('body').textContent=s.body;document.getElementById('kv').innerHTML=s.kv.map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join('');
+ [...flow.children].forEach((b,j)=>{b.classList.toggle('active',j===s.st-1);b.setAttribute('aria-pressed',j===s.st-1)})}
+const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+function draw(){const dpr=Math.min(2,devicePixelRatio||1),cw=cv.clientWidth||W;cv.width=Math.round(cw*dpr);cv.height=Math.round(cw*9/16*dpr);ctx.setTransform(cv.width/W,0,0,cv.height/H,0,0);ctx.fillStyle=C.bg;ctx.fillRect(0,0,W,H);
+ const i=sceneAt(T),p=reduced&&!playing?1:clamp((T-starts[i])/S[i].d);try{S[i].draw(p,T)}catch(e){console.error(e)}
+ const fd=Math.min(seg(T-starts[i],0,.35),seg(starts[i]+S[i].d-T,0,.35));if(fd<1){ctx.fillStyle=hex(C.bg,1-fd);ctx.fillRect(0,0,W,H)}
+ panel(i);[...flow.children].forEach((b,j)=>{const ss=S.map((s,k)=>[s,k]).filter(([s])=>s.st===j+1),a=starts[ss[0][1]],e=starts[ss[ss.length-1][1]]+ss[ss.length-1][0].d;b.querySelector('i').style.width=clamp((T-a)/(e-a))*100+'%'});
+ document.getElementById('time').textContent=`${fmt(T)} / ${fmt(tot)}`}
+function loop(ts){if(last!=null&&playing&&inViewport&&!document.hidden){T+=(ts-last)/1000;if(T>=tot)T=0}last=ts;if(inViewport&&!document.hidden)draw();requestAnimationFrame(loop)}
+function go(i){i=(i+S.length)%S.length;T=starts[i]+(reduced&&!playing?S[i].d-.001:.36);draw()}
+const pb=document.getElementById('play'),setPlay=v=>{playing=v;pb.textContent=v?'Pause':'Play architecture →'};setPlay(playing);pb.onclick=()=>setPlay(!playing);
+document.getElementById('prev').onclick=()=>go(sceneAt(T)-1);document.getElementById('next').onclick=()=>go(sceneAt(T)+1);document.getElementById('restart').onclick=()=>{T=0;setPlay(true)};
+addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('button'))return;if(e.code==='Space'){e.preventDefault();setPlay(!playing)}else if(e.key==='ArrowRight')go(sceneAt(T)+1);else if(e.key==='ArrowLeft')go(sceneAt(T)-1)});
+T=reduced?S[0].d-.001:0;draw();
+new IntersectionObserver(([entry])=>{inViewport=entry.isIntersecting&&entry.intersectionRatio>=.15;last=null;if(inViewport)draw();},{threshold:[0,.15]}).observe(document.querySelector('.screen'));
+document.addEventListener('visibilitychange',()=>{last=null});
+requestAnimationFrame(loop);
+</script>
+
+<p class="small">Timing scopes and evaluation protocols differ between these recorded runs. See <a href="../methods.html">methods and evidence</a> for the primary showcase protocol. Animated geometry is labelled schematic where applicable.</p></body></html>
