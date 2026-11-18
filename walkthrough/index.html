@@ -162,7 +162,7 @@ const FR=1500/844;
 
 const STAGES=[['Capture & poses','RGB · de-jello · tracking'],['Frame utility','Candidate · map · occupant'],['Select & source','ADD · SWAP · KEEP'],['Estimate depth','Posed, past-only student'],['Fuse & verify','Sky masks · 5-view support'],['Mesh & inspect','Triangles · textures · GLB']];
 const S=[
-{st:1,t:'The input',d:7,real:true,body:'A 27-second 4K drone video goes in. Neighbouring frames mostly repeat each other, and some are blurred or warped by the rolling shutter, so processing all of them wastes most of the time.',
+{st:1,t:'The input',d:3,real:true,body:'A 27-second 4K drone video goes in. Neighbouring frames mostly repeat each other, and some are blurred or warped by the rolling shutter, so processing all of them wastes most of the time.',
  kv:[['Frames','822'],['Resolution','3840 × 2160'],['Frame rate','30 fps']],
  draw(p,T){heading(1,'A 4K drone video comes in');badge(true);const w=820,h=w/FR,x=(W-w)/2,y=165,pan=60+180*((T*.05)%1);
   frame(IMG['fig_frame.jpg'],x,y,w,h,{sx:pan,sy:20,sw:1240,sh:1240/FR});const f=Math.floor(T*30)%822;
