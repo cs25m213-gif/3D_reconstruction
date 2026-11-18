@@ -6,7 +6,7 @@ The pipeline recovers camera poses, evaluates candidate frames, estimates multiv
 
 This repository contains the implementation, configuration templates, operational scripts and tests. Experimental outputs, datasets, trained weights, meshes and machine environments are stored separately.
 
-[Project website and poster](https://cs25m213-gif.github.io/3D_construction/) · [Architecture and implementation status](docs/architecture.md) · [Source map](docs/CODE_MAP.md) · [External dependencies](docs/DEPENDENCIES.md)
+[Project website](https://cs25m213-gif.github.io/3D_reconstruction/) · [Poster (PDF)](https://cs25m213-gif.github.io/3D_reconstruction/assets/poster.pdf) · [Architecture and implementation status](docs/architecture.md) · [Source map](docs/CODE_MAP.md) · [External dependencies](docs/DEPENDENCIES.md)
 
 ## Source layout
 
